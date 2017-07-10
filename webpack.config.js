@@ -8,12 +8,14 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, './dist'),
-    filename: '[name].js'
+    filename: '[name].js',
+    publicPath: '/'
   },
   module: {
-    rules: [
-      { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel-loader' }
-    ]
+    rules: [{ test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel-loader' }]
   },
-  plugins: [new HtmlWebpackPlugin()]
+  plugins: [new HtmlWebpackPlugin()],
+  devServer: {
+    historyApiFallback: true
+  }
 };

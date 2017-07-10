@@ -21,6 +21,7 @@
     "raven-js": "^3.16.1",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-router-dom": "^4.1.1",
     "styled-components": "^2.1.1",
     "styled-components-breakpoint": "^1.0.1",
     "styled-theme": "^0.3.3",

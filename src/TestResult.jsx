@@ -1,31 +1,40 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import backend from './backend.js';
 
-export default class TestResult extends React.PureComponent {
+export default class TestResult extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  async getTestResult(id) {
+    const testResult = await backend.testResult(id);
+    this.setState({ testResult });
+  }
+
+  componentWillMount() {
+    this.getTestResult(this.props.match.params.id);
+  }
+
   render() {
+    if (!backend.validateTestID(this.props.match.params.id)) {
+      return <p>Invalid test ID.</p>;
+    }
     return (
       <ul>
         <li>
-          domain: {this.props.data ? this.props.data.params.domain : 'loading'}
+            ID: {this.props.match.params.id}
         </li>
         <li>
-          date:{' '}
-          {this.props.data ? new Date(this.props.data.creation_time).toLocaleString() : 'loading'}
+            domain: {this.state.testResult ? this.state.testResult.params.domain : 'loading'}
+        </li>
+        <li>
+            date: {this.state.testResult
+              ? new Date(this.state.testResult.creation_time).toLocaleString()
+              : 'loading'}
         </li>
       </ul>
     );
   }
 }
-
-TestResult.propTypes = {
-  data: PropTypes.shape({
-    creation_time: PropTypes.string,
-    params: PropTypes.shape({
-      domain: PropTypes.string
-    })
-  })
-};
-
-TestResult.defaultProps = {
-  data: {}
-};
