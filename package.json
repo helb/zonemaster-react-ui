@@ -4,7 +4,7 @@
   "description": "Web interface for https://github.com/dotse/zonemaster-backend/",
   "scripts": {
     "start": "webpack-dev-server --progress --colors --hot --open --config ./webpack.config.js",
-    "lint": "eslint src"
+    "lint": "eslint webpack.config.js **/*.js **/*.jsx"
   },
   "license": "GPL-3.0",
   "author": {
