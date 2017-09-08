@@ -1,3 +1,25 @@
 {
-  "backendUrl": "http://localhost:5000"
+  "backendUrl": "http://localhost:5000",
+  "colors": {
+    "levels": {
+      "DEBUG": "#7a7a7a",
+      "INFO": "#0099ff",
+      "NOTICE": "#17ad4a",
+      "WARNING": "#ffb000",
+      "ERROR": "#ff2e00",
+      "CRITICAL": "#99001c"
+    },
+    "modules": {
+      "SYSTEM": "#2c434e",
+      "BASIC": "#393563",
+      "ADDRESS": "#4c315d",
+      "CONNECTIVITY": "#5d3353",
+      "CONSISTENCY": "#5e3333",
+      "DNSSEC": "#525229",
+      "DELEGATION": "#38532c",
+      "NAMESERVER": "#326257",
+      "SYNTAX": "#335260",
+      "ZONE": "#3d496f"
+    }
+  }
 }

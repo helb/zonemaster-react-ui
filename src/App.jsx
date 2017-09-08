@@ -11,7 +11,7 @@ export default class App extends React.PureComponent {
         <div>
           <Switch>
             <Route exact path="/" component={Info} />
-            <Route path="/result/:id" component={TestResult} />
+            <Route path="/test/:id" component={TestResult} />
             <Route render={() => <p>Page not found!</p>} />
           </Switch>
         </div>
