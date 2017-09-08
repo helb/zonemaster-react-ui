@@ -8,13 +8,13 @@ export default class TestResult extends React.Component {
     this.state = {};
   }
 
+  componentWillMount() {
+    this.getTestResult(this.props.match.params.id);
+  }
+
   async getTestResult(id) {
     const testResult = await backend.testResult(id);
     this.setState({ testResult });
-  }
-
-  componentWillMount() {
-    this.getTestResult(this.props.match.params.id);
   }
 
   render() {
