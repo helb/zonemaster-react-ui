@@ -1,7 +1,33 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import backend from './backend.js';
 import config from '../config.json';
+import styled from 'styled-components';
+
+const ResultTable = styled.table`
+  font-family: monospace;
+  border-collapse: collapse;
+  max-width: 100vw;
+`;
+
+const ResultLine = styled.tr`
+  vertical-align: top;
+`;
+
+const ModuleCell = styled.td`
+  border-left: 0.5em solid transparent;
+  font-weight: bold;
+  padding: 0.5em;
+`;
+
+const LevelCell = styled.td`
+  font-weight: bold;
+  padding: 0.5em;
+`;
+
+const MessageCell = styled.td`
+  padding: 0.5em;
+  word-break: break-all;
+`;
 
 export default class TestResult extends React.Component {
   constructor(props) {
@@ -39,39 +65,35 @@ export default class TestResult extends React.Component {
           </li>
         </ul>
 
-        <table style={{ fontFamily: 'monospace', borderCollapse: 'collapse' }}>
+        <ResultTable>
           <tbody>
             {this.state.testResult
               ? this.state.testResult.results.map((item, index, items) =>
-                (<tr key={index} style={{ verticalAlign: 'top'}}>
-                  <td
+                (<ResultLine key={index}>
+                  <ModuleCell
                     style={{
-                      fontWeight: 'bold',
                       color: config.colors.modules[item.module] || 'white',
-                      borderLeft: `0.5em solid ${config.colors.modules[item.module] || 'black'}`,
-                      padding: '0.5em'
+                      borderColor: config.colors.modules[item.module] || 'black'
                     }}
                   >
-                    {!items[index - 1] ? items[0]['module'] : ''}
-                    {items[index - 1] && items[index - 1]['module'] != item.module ? item.module: ''}
-                  </td>
-                  <td
+                    {!items[index - 1] ? items[0].module : ''}
+                    {items[index - 1] && items[index - 1].module != item.module ? item.module: ''}
+                  </ModuleCell>
+                  <LevelCell
                     style={{
-                      fontWeight: 'bold',
-                      color: config.colors.levels[item.level],
-                      padding: '0.5em'
+                      color: config.colors.levels[item.level]
                     }}
                   >
                     {item.level}
-                  </td>
-                  <td style={{ padding: '0.5em' }}>
+                  </LevelCell>
+                  <MessageCell>
                     {item.message}
-                  </td>
-                </tr>)
+                  </MessageCell>
+                </ResultLine>)
                 )
-              : ''}
+              : null}
           </tbody>
-        </table>
+        </ResultTable>
       </div>
     );
   }

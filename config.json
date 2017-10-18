@@ -1,5 +1,5 @@
 {
-  "backendUrl": "http://localhost:5000",
+  "backendUrl": "https://zonemaster.labs.nic.cz/backend/",
   "colors": {
     "levels": {
       "DEBUG": "#7a7a7a",
@@ -21,5 +21,9 @@
       "SYNTAX": "#335260",
       "ZONE": "#3d496f"
     }
+  },
+  "text": {
+    "title": "Zonemaster",
+    "footer": "Powered by CZ.NIC"
   }
 }

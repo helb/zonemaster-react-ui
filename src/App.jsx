@@ -1,20 +1,50 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import TestResult from './TestResult.jsx';
-import Info from './Info.jsx';
+import TestForm from './TestForm.jsx';
+import ResultList from './ResultList.jsx';
+import Header from './Header.jsx';
+import Footer from './Footer.jsx';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import styled from 'styled-components';
+import { injectGlobal } from 'styled-components';
+import config from '../config.json';
+
+injectGlobal`
+  body {
+    margin: 0;
+    font: 11pt/1.5em sans-serif;
+    min-height: 100vh;
+  }
+`;
+
+const AppContainer = styled.div`
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+`
+
+const AppContent = styled.div`
+  flex: 1;
+  padding: 1rem;
+`
 
 export default class App extends React.PureComponent {
   render() {
     return (
       <Router>
-        <div>
+        <AppContainer>
+          <Header title={config.text.title} />
+          <AppContent>
           <Switch>
-            <Route exact path="/" component={Info} />
-            <Route path="/test/:id" component={TestResult} />
+            <Route exact path="/" component={TestForm} />
+            <Route exact path="/result" component={ResultList} />
+            <Route path="/result/:id" component={TestResult} />
             <Route render={() => <p>Page not found!</p>} />
           </Switch>
-        </div>
+        </AppContent>
+          <Footer text={config.text.footer} />
+        </AppContainer>
       </Router>
     );
   }

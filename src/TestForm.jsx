@@ -1,15 +1,44 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import backend from './backend.js';
+import styled from 'styled-components';
+import { Redirect } from 'react-router';
 
-export default class Info extends React.Component {
+const FormContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 60vw;
+  border: 0.1em solid #ddd;
+  padding: 1rem;
+`
+
+const Form = styled.form`
+  display: flex;
+  flex-wrap: wrap;
+  line-height: 2rem;
+`
+
+const DomainInput = styled.label`
+  width: 100%;
+  display: flex;
+
+  input {
+    flex: 1;
+    margin-left: 1rem;
+    padding: 0.5rem;
+  }
+`
+
+export default class TestForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       testOptions: {
         ipv4: true,
         ipv6: true
-      }
+      },
+      validParams: false,
+      testRunning: false
     };
     this.handleDomainChange = this.handleDomainChange.bind(this);
     this.handleOptionChange = this.handleOptionChange.bind(this);
@@ -21,10 +50,15 @@ export default class Info extends React.Component {
     this.getVersionInfo();
   }
 
+  componentDidMount(){
+    this.domainInput.focus();
+  }
+
   handleDomainChange(event) {
     event.preventDefault();
     const newState = Object.assign({}, this.state);
     newState.testOptions.domain = event.target.value;
+    this.validateParams();
     this.setState(newState);
   }
 
@@ -32,12 +66,22 @@ export default class Info extends React.Component {
     const newState = Object.assign({}, this.state);
     newState.testOptions[event.target.name] = event.target.checked;
     this.setState(newState);
+    this.validateParams();
     event.stopPropagation();
+  }
+
+  async validateParams() {
+    const isValid = await backend.validateSyntax(this.state.testOptions);
+    const newState = Object.assign({}, this.state);
+    newState.validParams = isValid.ok;
+    this.setState(newState);
   }
 
   handleFormSubmit(event) {
     event.preventDefault();
-    const testId = this.startDomainTest();
+    if(this.state.validParams) {
+      this.startDomainTest();
+    }
   }
 
   async getVersionInfo() {
@@ -54,8 +98,15 @@ export default class Info extends React.Component {
 
   async updateTestProgress() {
     const testProgress = await backend.testProgress(this.state.testId);
-    if (testProgress.progress >= 100) {
+    if (testProgress.progress === 100) {
       this.setState({ testRunning: false });
+      const currentResults = window.localStorage.results ? JSON.parse(window.localStorage.results) : [];
+      currentResults.push({
+        i: this.state.testId,
+        d: this.state.testOptions.domain,
+        t: +new Date()
+      });
+      window.localStorage.results = JSON.stringify(currentResults);
       clearInterval(this.updateProgressTimer);
     }
     this.setState({ testProgress: testProgress.progress });
@@ -63,17 +114,17 @@ export default class Info extends React.Component {
 
   render() {
     return (
-      <div>
-        <div>
-          <form onSubmit={this.handleFormSubmit}>
-            <label>
+      <FormContainer>
+          <Form onSubmit={this.handleFormSubmit}>
+            <DomainInput>
               Domain name:
               <input
                 type="text"
                 onChange={this.handleDomainChange}
                 disabled={this.state.testRunning}
+                ref={(input) => { this.domainInput = input; }}
               />
-            </label>
+            </DomainInput>
             <label>
               <input
                 type="checkbox"
@@ -94,13 +145,13 @@ export default class Info extends React.Component {
               />
               ipv6
             </label>
-            <button type="submit" disabled={this.state.testRunning}>
+            <button type="submit" disabled={this.state.testRunning || !this.state.validParams}>
               Start
             </button>
-          </form>
-          {this.state.testRunning ? <p>RUNNING</p> : <p>-</p>}
-        </div>
+          </Form>
         <ul>
+          <li>{this.state.testRunning ? <p>RUNNING</p> : <p>-</p>}</li>
+          <li>{this.state.validParams ? <p>VALID</p> : <p>INVALID</p>}</li>
           <li>
             backend: {this.state.version ? this.state.version.zonemaster_backend : 'loading'}
           </li>
@@ -111,15 +162,11 @@ export default class Info extends React.Component {
             progress: {!isNaN(this.state.testProgress) ? `${this.state.testProgress} %` : '-- %'}
           </li>
           <li>
-            result:{' '}
-            {this.state.testId && this.state.testProgress === 100
-              ? <a href={`/test/${this.state.testId}`}>
-                {this.state.testId}
-              </a>
-              : '--'}
+            result: {this.state.testId && this.state.testProgress === 100
+              ? (<Redirect push to={`/result/${this.state.testId}`} />) : ''}
           </li>
         </ul>
-      </div>
+      </FormContainer>
     );
   }
 }
