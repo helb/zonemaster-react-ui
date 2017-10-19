@@ -15,15 +15,3 @@ pages:
   artifacts:
     paths:
      - public/
-
-lint_js:
-  stage: lint
-  script:
-    - npm install --silent eslint eslint-plugin-babel babel-eslint
-    - ./node_modules/.bin/eslint .
-
-lint_styles:
-  stage: lint
-  script:
-    - npm install --silent stylelint stylelint-config-standard
-    - ./node_modules/.bin/stylelint "**/*.scss"
