@@ -59,6 +59,7 @@ const Progress = styled.div`
 const DomainInput = styled.label`
   width: 100%;
   display: flex;
+  white-space: nowrap;
 
   input {
     flex: 1;
@@ -171,7 +172,7 @@ export default class TestForm extends React.Component {
                 disabled={this.state.testRunning || !this.state.testOptions.ipv6}
                 checked={this.state.testOptions.ipv4}
               />
-              ipv4
+              IPv4
             </label>
             <label>
               <input
@@ -181,7 +182,7 @@ export default class TestForm extends React.Component {
                 disabled={this.state.testRunning || !this.state.testOptions.ipv4}
                 checked={this.state.testOptions.ipv6}
               />
-              ipv6
+              IPv6
             </label>
             { !this.state.testRunning ?
             (<button type="submit" disabled={this.state.testRunning || !this.state.validParams}>
