@@ -27,6 +27,8 @@ const AppContainer = styled.div`
 const AppContent = styled.div`
   flex: 1;
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
 `
 
 export default class App extends React.PureComponent {
@@ -40,10 +42,10 @@ export default class App extends React.PureComponent {
             <Route exact path="/" component={TestForm} />
             <Route exact path="/result" component={ResultList} />
             <Route path="/result/:id" component={TestResult} />
-            <Route render={() => <p>Page not found!</p>} />
+            <Route render={() => <p>Page not found. :(</p>} />
           </Switch>
         </AppContent>
-          <Footer text={config.text.footer} />
+        <Footer text={config.text.footer} logo={config.footerLogo} />
         </AppContainer>
       </Router>
     );

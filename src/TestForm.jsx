@@ -6,16 +6,54 @@ import { Redirect } from 'react-router';
 
 const FormContainer = styled.div`
   display: flex;
-  flex-direction: column;
-  width: 60vw;
-  border: 0.1em solid #ddd;
-  padding: 1rem;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
 `
 
 const Form = styled.form`
+  border: 0.2em solid #ddd;
+  padding: 1rem;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   line-height: 2rem;
+
+  button {
+    padding: 0.5rem;
+    cursor: pointer;
+    margin-top: 1rem;
+    border: 0.2em solid #666;
+    background: transparent;
+    color: #666;
+    font-size: 1rem;
+    line-height: 1em;
+
+    &:not(:disabled) {
+      &:hover,
+      &:focus {
+        background: #666;
+        color: white;
+      }
+    }
+
+    &:disabled {
+      color: #aaa;
+      border-color: #aaa;
+      cursor: not-allowed;
+    }
+  }
+`
+
+const Progress = styled.div`
+  padding: 0.5rem;
+  margin-top: 1rem;
+  border: 0.2em solid #666;
+  color: ${props => props.value < 90 ? `#666` : `white`};
+  font-size: 1rem;
+  line-height: 1em;
+  padding-left: ${props => props.value < 90 ? `calc(${props.value}% + 0.25em)` : `calc(${props.value}% - 3em)`};
+  background: ${props => props.value ? `linear-gradient(to right, #666 ${props.value}%, white calc(${props.value}% + 1px));` : `transparent`};
+  transition: all 0.33s;
 `
 
 const DomainInput = styled.label`
@@ -145,27 +183,15 @@ export default class TestForm extends React.Component {
               />
               ipv6
             </label>
-            <button type="submit" disabled={this.state.testRunning || !this.state.validParams}>
+            { !this.state.testRunning ?
+            (<button type="submit" disabled={this.state.testRunning || !this.state.validParams}>
               Start
-            </button>
-          </Form>
-        <ul>
-          <li>{this.state.testRunning ? <p>RUNNING</p> : <p>-</p>}</li>
-          <li>{this.state.validParams ? <p>VALID</p> : <p>INVALID</p>}</li>
-          <li>
-            backend: {this.state.version ? this.state.version.zonemaster_backend : 'loading'}
-          </li>
-          <li>
-            engine: {this.state.version ? this.state.version.zonemaster_engine : 'loading'}
-          </li>
-          <li>
-            progress: {!isNaN(this.state.testProgress) ? `${this.state.testProgress} %` : '-- %'}
-          </li>
-          <li>
-            result: {this.state.testId && this.state.testProgress === 100
+            </button>) :
+            (<Progress value={this.state.testProgress}>{this.state.testProgress} %</Progress>)
+            }
+            {this.state.testId && this.state.testProgress === 100
               ? (<Redirect push to={`/result/${this.state.testId}`} />) : ''}
-          </li>
-        </ul>
+          </Form>
       </FormContainer>
     );
   }

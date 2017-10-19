@@ -8,7 +8,10 @@ const HeaderContainer = styled.header`
   flex-direction: column;
 
   h1 {
-    margin: 1rem;
+    margin: 1em 1rem;
+    color: #666;
+    font-weight: lighter;
+    font-size: 3em;
   }
 `
 
@@ -17,11 +20,21 @@ const Navigation = styled.nav`
   border-left: 0;
   border-right: 0;
   display: flex;
+  flex-wrap: wrap;
   padding: 0 1rem;
 
   a {
     line-height: 2rem;
     margin: 0 1rem 0 0;
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+    white-space: nowrap;
+
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+    }
   }
 `
 
@@ -32,6 +45,7 @@ export default class Header extends React.PureComponent {
         <h1>{this.props.title}</h1>
         <Navigation>
           <Link to="/">New test</Link>
+          <Link to="/undelegated">Undelegated domain test</Link>
           <Link to="/result">Results</Link>
         </Navigation>
       </HeaderContainer>
