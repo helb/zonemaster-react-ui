@@ -5,7 +5,7 @@ import TestForm from './TestForm.jsx';
 import ResultList from './ResultList.jsx';
 import Header from './Header.jsx';
 import Footer from './Footer.jsx';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
 import { injectGlobal } from 'styled-components';
 import config from '../config.json';
