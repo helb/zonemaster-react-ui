@@ -1,17 +1,28 @@
+/* eslint global-require: 0 */
+
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
+import { AppContainer } from 'react-hot-loader'; // eslint-disable-line import/no-extraneous-dependencies
 import App from './App.jsx';
 import config from '../config.json';
 
 document.title = config.text.title;
-const mountNode = document.createElement('div');
-document.body.appendChild(mountNode);
-ReactDOM.render(<App />, mountNode);
 
-const render = () => {
-  ReactDOM.render(<App />, mountNode);
-};
+render(
+  <AppContainer>
+    <App />
+  </AppContainer>,
+  document.getElementById('root'),
+);
 
-render();
-
-module.hot.accept('./App.jsx', render);
+if (module.hot) {
+  module.hot.accept('./App', () => {
+    const NewRoot = require('./App').default;
+    render(
+      <AppContainer>
+        <NewRoot />
+      </AppContainer>,
+      document.getElementById('root'),
+    );
+  });
+}

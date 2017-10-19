@@ -1,0 +1,12 @@
+{
+  "extends": "airbnb",
+  "env": {
+    "browser": true
+  },
+  "rules": {
+    "react/forbid-prop-types": ["error", { "forbid": ["any"] }],
+    "comma-dangle": ["error", "never"],
+    "function-paren-newline": ["error", "consistent"],
+    "jsx-a11y/anchor-is-valid": [ "error", { "components": [ "a" ] }]
+  }
+}
