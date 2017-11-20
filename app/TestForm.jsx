@@ -9,7 +9,7 @@ const FormContainer = styled.div`
   align-items: center;
   justify-content: center;
   flex: 1;
-`
+`;
 
 const Form = styled.form`
   border: 0.2em solid #ddd;
@@ -42,19 +42,23 @@ const Form = styled.form`
       cursor: not-allowed;
     }
   }
-`
+`;
 
 const Progress = styled.div`
   padding: 0.5rem;
   margin-top: 1rem;
   border: 0.2em solid #666;
-  color: ${props => props.value < 90 ? `#666` : `white`};
+  color: ${props => (props.value < 90 ? '#666' : 'white')};
   font-size: 1rem;
   line-height: 1em;
-  padding-left: ${props => props.value < 90 ? `calc(${props.value}% + 0.25em)` : `calc(${props.value}% - 3em)`};
-  background: ${props => props.value ? `linear-gradient(to right, #666 ${props.value}%, white calc(${props.value}% + 1px));` : `transparent`};
+  padding-left: ${props =>
+    (props.value < 90 ? `calc(${props.value}% + 0.25em)` : `calc(${props.value}% - 3em)`)};
+  background: ${props =>
+    (props.value
+      ? `linear-gradient(to right, #666 ${props.value}%, white calc(${props.value}% + 1px));`
+      : 'transparent')};
   transition: all 0.33s;
-`
+`;
 
 const DomainInput = styled.label`
   width: 100%;
@@ -66,7 +70,7 @@ const DomainInput = styled.label`
     margin-left: 1rem;
     padding: 0.5rem;
   }
-`
+`;
 
 export default class TestForm extends React.Component {
   constructor(props) {
@@ -89,7 +93,7 @@ export default class TestForm extends React.Component {
     this.getVersionInfo();
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.domainInput.focus();
   }
 
@@ -118,7 +122,7 @@ export default class TestForm extends React.Component {
 
   handleFormSubmit(event) {
     event.preventDefault();
-    if(this.state.validParams) {
+    if (this.state.validParams) {
       this.startDomainTest();
     }
   }
@@ -139,7 +143,9 @@ export default class TestForm extends React.Component {
     const testProgress = await backend.testProgress(this.state.testId);
     if (testProgress.progress === 100) {
       this.setState({ testRunning: false });
-      const currentResults = window.localStorage.results ? JSON.parse(window.localStorage.results) : [];
+      const currentResults = window.localStorage.results
+        ? JSON.parse(window.localStorage.results)
+        : [];
       currentResults.push({
         i: this.state.testId,
         d: this.state.testOptions.domain,
@@ -154,45 +160,51 @@ export default class TestForm extends React.Component {
   render() {
     return (
       <FormContainer>
-          <Form onSubmit={this.handleFormSubmit}>
-            <DomainInput>
-              Domain name:
-              <input
-                type="text"
-                onChange={this.handleDomainChange}
-                disabled={this.state.testRunning}
-                ref={(input) => { this.domainInput = input; }}
-              />
-            </DomainInput>
-            <label>
-              <input
-                type="checkbox"
-                name="ipv4"
-                onChange={this.handleOptionChange}
-                disabled={this.state.testRunning || !this.state.testOptions.ipv6}
-                checked={this.state.testOptions.ipv4}
-              />
-              IPv4
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                name="ipv6"
-                onChange={this.handleOptionChange}
-                disabled={this.state.testRunning || !this.state.testOptions.ipv4}
-                checked={this.state.testOptions.ipv6}
-              />
-              IPv6
-            </label>
-            { !this.state.testRunning ?
-            (<button type="submit" disabled={this.state.testRunning || !this.state.validParams}>
+        <Form onSubmit={this.handleFormSubmit}>
+          <DomainInput>
+            Domain name:
+            <input
+              type="text"
+              onChange={this.handleDomainChange}
+              disabled={this.state.testRunning}
+              ref={(input) => {
+                this.domainInput = input;
+              }}
+            />
+          </DomainInput>
+          <label>
+            <input
+              type="checkbox"
+              name="ipv4"
+              onChange={this.handleOptionChange}
+              disabled={this.state.testRunning || !this.state.testOptions.ipv6}
+              checked={this.state.testOptions.ipv4}
+            />
+            IPv4
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              name="ipv6"
+              onChange={this.handleOptionChange}
+              disabled={this.state.testRunning || !this.state.testOptions.ipv4}
+              checked={this.state.testOptions.ipv6}
+            />
+            IPv6
+          </label>
+          {!this.state.testRunning ? (
+            <button type="submit" disabled={this.state.testRunning || !this.state.validParams}>
               Start
-            </button>) :
-            (<Progress value={this.state.testProgress}>{this.state.testProgress} %</Progress>)
-            }
-            {this.state.testId && this.state.testProgress === 100
-              ? (<Redirect push to={`/result/${this.state.testId}`} />) : ''}
-          </Form>
+            </button>
+          ) : (
+            <Progress value={this.state.testProgress}>{this.state.testProgress} %</Progress>
+          )}
+          {this.state.testId && this.state.testProgress === 100 ? (
+            <Redirect push to={`/result/${this.state.testId}`} />
+          ) : (
+            ''
+          )}
+        </Form>
       </FormContainer>
     );
   }

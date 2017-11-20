@@ -51,12 +51,8 @@ export default class TestResult extends React.Component {
     return (
       <div>
         <ul>
-          <li>
-            ID: {this.props.match.params.id}
-          </li>
-          <li>
-            domain: {this.state.testResult ? this.state.testResult.params.domain : 'loading'}
-          </li>
+          <li>ID: {this.props.match.params.id}</li>
+          <li>domain: {this.state.testResult ? this.state.testResult.params.domain : 'loading'}</li>
           <li>
             date:{' '}
             {this.state.testResult
@@ -68,29 +64,29 @@ export default class TestResult extends React.Component {
         <ResultTable>
           <tbody>
             {this.state.testResult
-              ? this.state.testResult.results.map((item, index, items) =>
-                (<ResultLine key={index}>
+              ? this.state.testResult.results.map((item, index, items) => (
+                <ResultLine key={index}>
                   <ModuleCell
                     style={{
-                      color: config.colors.modules[item.module] || 'white',
-                      borderColor: config.colors.modules[item.module] || 'black'
-                    }}
+                        color: config.colors.modules[item.module] || 'white',
+                        borderColor: config.colors.modules[item.module] || 'black'
+                      }}
                   >
                     {!items[index - 1] ? items[0].module : ''}
-                    {items[index - 1] && items[index - 1].module != item.module ? item.module: ''}
+                    {items[index - 1] && items[index - 1].module != item.module
+                        ? item.module
+                        : ''}
                   </ModuleCell>
                   <LevelCell
                     style={{
-                      color: config.colors.levels[item.level]
-                    }}
+                        color: config.colors.levels[item.level]
+                      }}
                   >
                     {item.level}
                   </LevelCell>
-                  <MessageCell>
-                    {item.message}
-                  </MessageCell>
-                </ResultLine>)
-                )
+                  <MessageCell>{item.message}</MessageCell>
+                </ResultLine>
+                ))
               : null}
           </tbody>
         </ResultTable>

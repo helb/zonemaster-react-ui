@@ -23,7 +23,7 @@ const FooterContainer = styled.footer`
       vertical-align: middle;
     }
   }
-`
+`;
 
 export default class Footer extends React.PureComponent {
   render() {
@@ -34,6 +34,6 @@ export default class Footer extends React.PureComponent {
           <img alt="CZ.NIC" src={this.props.logo} />
         </a>
       </FooterContainer>
-    )
+    );
   }
 }

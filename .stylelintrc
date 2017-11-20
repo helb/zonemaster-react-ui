@@ -1,0 +1,13 @@
+{
+  "processors": ["stylelint-processor-styled-components"],
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-styled-components"
+  ],
+  "syntax": "scss",
+  "rules": {
+    "indentation": 2,
+    "unit-whitelist": ["px", "em", "rem", "vh", "vw", "%", "s"],
+    "rule-empty-line-before": null
+  }
+}

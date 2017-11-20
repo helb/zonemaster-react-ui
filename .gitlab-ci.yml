@@ -1,13 +1,46 @@
-image: node:8
+image: node:9
 
 stages:
+  - setup
+  - test+lint
   - build
 
+setup:
+  stage: setup
+  script:
+    - npm install
+  artifacts:
+    expire_in: 30 min
+    paths:
+      - node_modules
+
+lint:js:
+  dependencies:
+    - setup
+  stage: test+lint
+  script:
+    - npm run lint:js
+
+lint:css:
+  dependencies:
+    - setup
+  stage: test+lint
+  script:
+    - npm run lint:css
+
+# test:
+#   dependencies:
+#     - setup
+#   stage: test+lint
+#   script:
+#     - npm run test
+
 pages:
+  dependencies:
+    - setup
   stage: build
   script:
-   - npm install --silent
-   - npm run build
+    - npm run build
   artifacts:
     paths:
-     - public/
+      - public/

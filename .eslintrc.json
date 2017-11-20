@@ -7,6 +7,8 @@
     "react/forbid-prop-types": ["error", { "forbid": ["any"] }],
     "comma-dangle": ["error", "never"],
     "function-paren-newline": ["error", "consistent"],
-    "jsx-a11y/anchor-is-valid": [ "error", { "components": [ "a" ] }]
+    "jsx-a11y/anchor-is-valid": ["error", { "components": ["a"] }],
+    "max-len": ["error", 100],
+    "react/require-default-props": 0
   }
 }
