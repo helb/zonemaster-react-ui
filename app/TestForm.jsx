@@ -143,15 +143,11 @@ export default class TestForm extends React.Component {
     const testProgress = await backend.testProgress(this.state.testId);
     if (testProgress.progress === 100) {
       this.setState({ testRunning: false });
-      const currentResults = window.localStorage.results
-        ? JSON.parse(window.localStorage.results)
-        : [];
-      currentResults.push({
-        i: this.state.testId,
-        d: this.state.testOptions.domain,
-        t: +new Date()
+      db.add({
+        id: this.state.testId,
+        domain: this.state.testOptions.domain,
+        date: new Date()
       });
-      window.localStorage.results = JSON.stringify(currentResults);
       clearInterval(this.updateProgressTimer);
     }
     this.setState({ testProgress: testProgress.progress });
