@@ -1,8 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import backend from './backend.js';
+import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
-import { Redirect } from 'react-router';
+import backend from './backend';
+import db from './db';
+import Button from './styled/Button';
+import Progress from './styled/Progress';
 
 const FormContainer = styled.div`
   display: flex;
@@ -17,47 +19,7 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   line-height: 2rem;
-
-  button {
-    padding: 0.5rem;
-    cursor: pointer;
-    margin-top: 1rem;
-    border: 0.2em solid #666;
-    background: transparent;
-    color: #666;
-    font-size: 1rem;
-    line-height: 1em;
-
-    &:not(:disabled) {
-      &:hover,
-      &:focus {
-        background: #666;
-        color: white;
-      }
-    }
-
-    &:disabled {
-      color: #aaa;
-      border-color: #aaa;
-      cursor: not-allowed;
-    }
   }
-`;
-
-const Progress = styled.div`
-  padding: 0.5rem;
-  margin-top: 1rem;
-  border: 0.2em solid #666;
-  color: ${props => (props.value < 90 ? '#666' : 'white')};
-  font-size: 1rem;
-  line-height: 1em;
-  padding-left: ${props =>
-    (props.value < 90 ? `calc(${props.value}% + 0.25em)` : `calc(${props.value}% - 3em)`)};
-  background: ${props =>
-    (props.value
-      ? `linear-gradient(to right, #666 ${props.value}%, white calc(${props.value}% + 1px));`
-      : 'transparent')};
-  transition: all 0.33s;
 `;
 
 const DomainInput = styled.label`
@@ -189,9 +151,9 @@ export default class TestForm extends React.Component {
             IPv6
           </label>
           {!this.state.testRunning ? (
-            <button type="submit" disabled={this.state.testRunning || !this.state.validParams}>
+            <Button type="submit" disabled={this.state.testRunning || !this.state.validParams}>
               Start
-            </button>
+            </Button>
           ) : (
             <Progress value={this.state.testProgress}>{this.state.testProgress} %</Progress>
           )}
