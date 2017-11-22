@@ -7,6 +7,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+// eslint-disable-next-line import/no-extraneous-dependencies
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
   devtool: 'nosources-source-map',
@@ -41,12 +43,8 @@ module.exports = {
     // file as they dont have to wait for the JS to load.
     new ExtractTextPlugin('[name]-[hash].min.css'),
     // handles uglifying js
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-      compressor: {
-        warnings: false,
-        screw_ie8: true
-      }
+    new UglifyJsPlugin({
+      sourceMap: true
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
