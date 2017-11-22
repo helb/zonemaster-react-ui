@@ -15,14 +15,16 @@ const ResultLine = styled.tr`
 `;
 
 const ModuleCell = styled.td`
-  border-left: 0.5em solid transparent;
+  border-left: 0.5em solid ${props => props.border};
   font-weight: bold;
   padding: 0.5em;
+  color: ${props => props.color};
 `;
 
 const LevelCell = styled.td`
   font-weight: bold;
   padding: 0.5em;
+  color: ${props => props.color};
 `;
 
 const MessageCell = styled.td`
@@ -68,23 +70,15 @@ class TestResult extends React.Component {
               ? this.state.testResult.results.map((item, index, items) => (
                 <ResultLine key={btoa(index + item.message)}>
                   <ModuleCell
-                    style={{
-                        color: config.colors.modules[item.module] || 'white',
-                        borderColor: config.colors.modules[item.module] || 'black'
-                      }}
+                    color={config.colors.modules[item.module] || 'white'}
+                    border={config.colors.modules[item.module] || 'black'}
                   >
                     {!items[index - 1] ? items[0].module : ''}
                     {items[index - 1] && items[index - 1].module !== item.module
                         ? item.module
                         : ''}
                   </ModuleCell>
-                  <LevelCell
-                    style={{
-                        color: config.colors.levels[item.level]
-                      }}
-                  >
-                    {item.level}
-                  </LevelCell>
+                  <LevelCell color={config.colors.levels[item.level]}>{item.level}</LevelCell>
                   <MessageCell>{item.message}</MessageCell>
                 </ResultLine>
                 ))
