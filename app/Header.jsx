@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import Logo from './assets/icons/favicon.svg';
 
 const HeaderContainer = styled.header`
   display: flex;
@@ -13,7 +14,7 @@ const HeaderContainer = styled.header`
     font-weight: lighter;
     font-size: 3em;
   }
-`
+`;
 
 const Navigation = styled.nav`
   border: 0.1rem solid #ddd;
@@ -36,19 +37,24 @@ const Navigation = styled.nav`
       text-decoration: underline;
     }
   }
-`
+`;
 
-export default class Header extends React.PureComponent {
-  render() {
-    return (
-      <HeaderContainer>
-        <h1>{this.props.title}</h1>
-        <Navigation>
-          <Link to="/">New test</Link>
-          <Link to="/undelegated">Undelegated domain test</Link>
-          <Link to="/result">Results</Link>
-        </Navigation>
-      </HeaderContainer>
-    )
-  }
-}
+const Header = props => (
+  <HeaderContainer>
+    <h1>
+      <Logo />
+      {props.title}
+    </h1>
+    <Navigation>
+      <Link to="/">New test</Link>
+      <Link to="/undelegated">Undelegated domain test</Link>
+      <Link to="/result">Results</Link>
+    </Navigation>
+  </HeaderContainer>
+);
+
+Header.propTypes = {
+  title: PropTypes.string.isRequired
+};
+
+export default Header;

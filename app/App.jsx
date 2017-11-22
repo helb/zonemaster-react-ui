@@ -1,12 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import TestResult from './TestResult.jsx';
-import TestForm from './TestForm.jsx';
-import ResultList from './ResultList.jsx';
-import Header from './Header.jsx';
-import Footer from './Footer.jsx';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
+import TestResult from './TestResult';
+import TestForm from './TestForm';
+import ResultList from './ResultList';
+import Header from './Header';
+import Footer from './Footer';
 import config from '../config.json';
 
 const AppContainer = styled.div`
@@ -22,23 +21,21 @@ const AppContent = styled.div`
   flex-direction: column;
 `;
 
-export default class App extends React.PureComponent {
-  render() {
-    return (
-      <Router>
-        <AppContainer>
-          <Header title={config.text.title} />
-          <AppContent>
-            <Switch>
-              <Route exact path="/" component={TestForm} />
-              <Route exact path="/result" component={ResultList} />
-              <Route path="/result/:id" component={TestResult} />
-              <Route render={() => <p>Page not found. :(</p>} />
-            </Switch>
-          </AppContent>
-          <Footer text={config.text.footer} logo={config.footerLogo} />
-        </AppContainer>
-      </Router>
-    );
-  }
-}
+const App = () => (
+  <Router>
+    <AppContainer>
+      <Header title={config.text.title} />
+      <AppContent>
+        <Switch>
+          <Route exact path="/" component={TestForm} />
+          <Route exact path="/result" component={ResultList} />
+          <Route path="/result/:id" component={TestResult} />
+          <Route render={() => <p>Page not found. :(</p>} />
+        </Switch>
+      </AppContent>
+      <Footer text={config.text.footer} logo={config.footerLogo} />
+    </AppContainer>
+  </Router>
+);
+
+export default App;

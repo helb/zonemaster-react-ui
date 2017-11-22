@@ -1,9 +1,9 @@
 /* eslint global-require: 0 */
-
 import React from 'react';
 import { render } from 'react-dom';
-import { AppContainer } from 'react-hot-loader'; // eslint-disable-line import/no-extraneous-dependencies
-import App from './App.jsx';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { AppContainer } from 'react-hot-loader';
+import App from './App';
 import config from '../config.json';
 
 document.title = config.text.title;

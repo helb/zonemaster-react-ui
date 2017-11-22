@@ -59,6 +59,11 @@ export default class TestForm extends React.Component {
     this.domainInput.focus();
   }
 
+  async getVersionInfo() {
+    const version = await backend.versionInfo();
+    this.setState({ version });
+  }
+
   handleDomainChange(event) {
     event.preventDefault();
     const newState = Object.assign({}, this.state);
@@ -87,11 +92,6 @@ export default class TestForm extends React.Component {
     if (this.state.validParams) {
       this.startDomainTest();
     }
-  }
-
-  async getVersionInfo() {
-    const version = await backend.versionInfo();
-    this.setState({ version });
   }
 
   async startDomainTest() {
@@ -130,9 +130,10 @@ export default class TestForm extends React.Component {
               }}
             />
           </DomainInput>
-          <label>
+          <label htmlFor="ipv4">
             <input
               type="checkbox"
+              id="ipv4"
               name="ipv4"
               onChange={this.handleOptionChange}
               disabled={this.state.testRunning || !this.state.testOptions.ipv6}
@@ -140,9 +141,10 @@ export default class TestForm extends React.Component {
             />
             IPv4
           </label>
-          <label>
+          <label htmlFor="ipv6">
             <input
               type="checkbox"
+              id="ipv6"
               name="ipv6"
               onChange={this.handleOptionChange}
               disabled={this.state.testRunning || !this.state.testOptions.ipv4}
@@ -162,6 +164,8 @@ export default class TestForm extends React.Component {
           ) : (
             ''
           )}
+          {this.state.version ? <p>backend : {this.state.version.zonemaster_backend}</p> : null}
+          {this.state.version ? <p>engine : {this.state.version.zonemaster_engine}</p> : null}
         </Form>
       </FormContainer>
     );

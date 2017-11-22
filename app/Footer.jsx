@@ -25,15 +25,18 @@ const FooterContainer = styled.footer`
   }
 `;
 
-export default class Footer extends React.PureComponent {
-  render() {
-    return (
-      <FooterContainer>
-        <p className="footer-text">{this.props.text}</p>
-        <a href="https://www.nic.cz/" className="footer-logo">
-          <img alt="CZ.NIC" src={this.props.logo} />
-        </a>
-      </FooterContainer>
-    );
-  }
-}
+const Footer = props => (
+  <FooterContainer>
+    <p className="footer-text">{props.text}</p>
+    <a href="https://www.nic.cz/" className="footer-logo">
+      <img alt="CZ.NIC" src={props.logo} />
+    </a>
+  </FooterContainer>
+);
+
+Footer.propTypes = {
+  text: PropTypes.string.isRequired,
+  logo: PropTypes.string.isRequired
+};
+
+export default Footer;

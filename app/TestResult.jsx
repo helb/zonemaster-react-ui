@@ -1,7 +1,8 @@
 import React from 'react';
-import backend from './backend.js';
-import config from '../config.json';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import backend from './backend';
+import config from '../config.json';
 
 const ResultTable = styled.table`
   font-family: monospace;
@@ -29,7 +30,7 @@ const MessageCell = styled.td`
   word-break: break-all;
 `;
 
-export default class TestResult extends React.Component {
+class TestResult extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -65,7 +66,7 @@ export default class TestResult extends React.Component {
           <tbody>
             {this.state.testResult
               ? this.state.testResult.results.map((item, index, items) => (
-                <ResultLine key={index}>
+                <ResultLine key={btoa(index + item.message)}>
                   <ModuleCell
                     style={{
                         color: config.colors.modules[item.module] || 'white',
@@ -73,7 +74,7 @@ export default class TestResult extends React.Component {
                       }}
                   >
                     {!items[index - 1] ? items[0].module : ''}
-                    {items[index - 1] && items[index - 1].module != item.module
+                    {items[index - 1] && items[index - 1].module !== item.module
                         ? item.module
                         : ''}
                   </ModuleCell>
@@ -94,3 +95,13 @@ export default class TestResult extends React.Component {
     );
   }
 }
+
+TestResult.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string.isRequired
+    }).isRequired
+  }).isRequired
+};
+
+export default TestResult;
