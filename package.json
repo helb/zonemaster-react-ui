@@ -29,8 +29,6 @@
     "react-router-dom": "^4.2.2",
     "styled-components": "^2.2.3",
     "styled-components-breakpoint": "^1.0.1",
-    "styled-theme": "^0.3.3",
-    "universal-cookie": "^2.1.0",
     "zonemaster-js": "^0.0.8"
   },
   "devDependencies": {
@@ -63,7 +61,7 @@
     "stylelint": "^8.2.0",
     "stylelint-config-standard": "^17.0.0",
     "stylelint-config-styled-components": "^0.1.1",
-    "stylelint-processor-styled-components": "^1.0.0",
+    "stylelint-processor-styled-components": "^1.1.0",
     "svg-react-loader": "^0.4.5",
     "uglify-es": "github:mishoo/UglifyJS2#harmony",
     "uglifyjs-webpack-plugin": "^1.1.0",
