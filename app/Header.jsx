@@ -13,6 +13,10 @@ const HeaderContainer = styled.header`
     color: #666;
     font-weight: lighter;
     font-size: 3em;
+
+    svg {
+      margin-right: 0.3em;
+    }
   }
 `;
 
