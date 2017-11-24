@@ -6,6 +6,7 @@
     "test": "",
     "start": "webpack-dev-server",
     "build": "rimraf public && cross-env NODE_ENV=production webpack --config ./webpack.production.config.js",
+    "build:stats": "rimraf public && cross-env NODE_ENV=production webpack --config ./webpack.production.config.js --json > webpack.stats.json",
     "lint:js": "eslint .",
     "lint:css": "stylelint app/**/*.jsx"
   },
