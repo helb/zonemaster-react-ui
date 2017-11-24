@@ -48,18 +48,28 @@ module.exports = {
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
-      filename: 'vendor.[chunkhash].js',
-      minChunks: module => module.context && module.context.indexOf('node_modules') >= 0
+      minChunks: m => /node_modules/.test(m.context)
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'react',
-      filename: 'react.[chunkhash].js',
-      minChunks: module =>
-        module.context &&
-        module.context.indexOf('node_modules') >= 0 &&
-        module.context.indexOf('react') >= 0
+      minChunks: m => /node_modules\/(?:react|react-router|babel|dexie|styl)/.test(m.context)
     }),
-
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'router',
+      minChunks: m => /node_modules\/(?:react-router|babel|dexie|styl)/.test(m.context)
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'dexie',
+      minChunks: m => /node_modules\/(?:babel|dexie|styl)/.test(m.context)
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'styled',
+      minChunks: m => /node_modules\/(?:babel|styl)/.test(m.context)
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'polyfill',
+      minChunks: m => /node_modules\/(?:babel)/.test(m.context)
+    }),
     // plugin for passing in data to the js, like what NODE_ENV we are in.
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
