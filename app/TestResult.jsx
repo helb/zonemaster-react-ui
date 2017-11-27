@@ -4,6 +4,14 @@ import PropTypes from 'prop-types';
 import backend from './backend';
 import config from '../config.json';
 
+
+const Container = styled.div`
+  ul {
+    list-style-position: inside;
+    margin-bottom: 2em;
+  }
+`;
+
 const ResultTable = styled.table`
   font-family: monospace;
   border-collapse: collapse;
@@ -52,9 +60,8 @@ class TestResult extends React.Component {
       return <p>Invalid test ID.</p>;
     }
     return (
-      <div>
+      <Container>
         <ul>
-          <li>ID: {this.props.match.params.id}</li>
           <li>domain: {this.state.testResult ? this.state.testResult.params.domain : 'loading'}</li>
           <li>
             date:{' '}
@@ -75,17 +82,17 @@ class TestResult extends React.Component {
                   >
                     {!items[index - 1] ? items[0].module : ''}
                     {items[index - 1] && items[index - 1].module !== item.module
-                        ? item.module
-                        : ''}
+                      ? item.module
+                      : ''}
                   </ModuleCell>
                   <LevelCell color={config.colors.levels[item.level]}>{item.level}</LevelCell>
                   <MessageCell>{item.message}</MessageCell>
                 </ResultLine>
-                ))
+              ))
               : null}
           </tbody>
         </ResultTable>
-      </div>
+      </Container>
     );
   }
 }
