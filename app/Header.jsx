@@ -9,10 +9,11 @@ const HeaderContainer = styled.header`
   flex-direction: column;
 
   h1 {
-    margin: 1em 1rem;
+    margin: 1em auto 1em 14vw;
     color: #666;
     font-weight: lighter;
     font-size: 3em;
+    white-space: nowrap;
 
     svg {
       margin-right: 0.3em;
@@ -26,7 +27,7 @@ const Navigation = styled.nav`
   border-right: 0;
   display: flex;
   flex-wrap: wrap;
-  padding: 0 1rem;
+  padding: 0 14vw;
 
   a {
     line-height: 2rem;

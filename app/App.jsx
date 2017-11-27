@@ -16,7 +16,7 @@ const AppContainer = styled.div`
 
 const AppContent = styled.div`
   flex: 1;
-  padding: 1rem;
+  padding: 1rem 14vw;
   display: flex;
   flex-direction: column;
 `;

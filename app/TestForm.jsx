@@ -28,6 +28,8 @@ const DomainInput = styled.label`
   white-space: nowrap;
 
   input {
+    min-width: 12em;
+    border: 0.1em solid #666;
     flex: 1;
     margin-left: 1rem;
     padding: 0.5rem;

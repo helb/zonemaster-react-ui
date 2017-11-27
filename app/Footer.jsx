@@ -6,7 +6,7 @@ import backend from './backend';
 const FooterContainer = styled.footer`
   border-top: 0.1rem solid #ddd;
   margin-top: 1rem;
-  padding: 1rem;
+  padding: 1rem 14vw;
   display: flex;
   align-items: center;
 
