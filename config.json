@@ -26,5 +26,6 @@
     "title": "Zonemaster",
     "footer": "© 2017 CZ.NIC Labs"
   },
-  "footerLogo": "https://www.netmetr.cz/theme/images/logo-cznic.svg"
+  "footerLogo": "https://www.netmetr.cz/theme/images/logo-cznic.svg",
+  "footerLink": "https://www.nic.cz/"
 }

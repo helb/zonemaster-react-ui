@@ -51,17 +51,8 @@ export default class TestForm extends React.Component {
     this.updateTestProgress = this.updateTestProgress.bind(this);
   }
 
-  componentWillMount() {
-    this.getVersionInfo();
-  }
-
   componentDidMount() {
     this.domainInput.focus();
-  }
-
-  async getVersionInfo() {
-    const version = await backend.versionInfo();
-    this.setState({ version });
   }
 
   handleDomainChange(event) {
@@ -164,8 +155,6 @@ export default class TestForm extends React.Component {
           ) : (
             ''
           )}
-          {this.state.version ? <p>backend : {this.state.version.zonemaster_backend}</p> : null}
-          {this.state.version ? <p>engine : {this.state.version.zonemaster_engine}</p> : null}
         </Form>
       </FormContainer>
     );
