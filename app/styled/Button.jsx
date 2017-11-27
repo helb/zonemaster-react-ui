@@ -10,17 +10,17 @@ export default styled.button`
   font-size: 1rem;
   line-height: 1em;
 
+  &:disabled {
+    color: #aaa;
+    border-color: #aaa;
+    cursor: not-allowed;
+  }
+
   &:not(:disabled) {
     &:hover,
     &:focus {
       background: #666;
       color: white;
     }
-  }
-
-  &:disabled {
-    color: #aaa;
-    border-color: #aaa;
-    cursor: not-allowed;
   }
 `;
