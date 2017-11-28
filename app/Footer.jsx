@@ -20,6 +20,15 @@ const FooterContainer = styled.footer`
         color: #333;
       }
     }
+
+    span {
+      white-space: nowrap;
+      display: inline-block;
+
+      &:not(:first-child) {
+        padding-left: 0.33em;
+      }
+    }
   }
 
   .footer-logo {
@@ -54,12 +63,18 @@ class Footer extends React.Component {
     return (
       <FooterContainer>
         <p className="footer-text">
-          {this.props.data.text}{' '}
+          <span>{this.props.data.text} </span>
           {this.props.data.mail ? (
-            <span>| <a href={`mailto:${this.props.data.mail}`}>{this.props.data.mail}</a></span>
+            <span>
+              | <a href={`mailto:${this.props.data.mail}`}>{this.props.data.mail}</a>
+            </span>
           ) : null}
-          {this.state.version ? ` | backend: ${this.state.version.zonemaster_backend} ` : null}
-          {this.state.version ? ` | engine: ${this.state.version.zonemaster_engine}` : null}
+          {this.state.version ? (
+            <span> | backend: {this.state.version.zonemaster_backend} </span>
+          ) : null}
+          {this.state.version ? (
+            <span> | engine: {this.state.version.zonemaster_engine} </span>
+          ) : null}
         </p>
         {this.props.data.logo ? (
           <a href={this.props.data.logo.link} className="footer-logo">
