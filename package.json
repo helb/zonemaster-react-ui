@@ -59,7 +59,7 @@
     "react-hot-loader": "next",
     "rimraf": "^2.6.2",
     "stats-webpack-plugin": "^0.6.1",
-    "stylelint": "^8.3.0",
+    "stylelint": "^8.3.1",
     "stylelint-config-standard": "^18.0.0",
     "stylelint-config-styled-components": "^0.1.1",
     "stylelint-processor-styled-components": "^1.1.1",
@@ -68,7 +68,7 @@
     "uglifyjs-webpack-plugin": "^1.1.1",
     "url-loader": "^0.6.2",
     "webpack": "^3.8.1",
-    "webpack-dev-server": "^2.9.4",
+    "webpack-dev-server": "^2.9.5",
     "webpack-subresource-integrity": "^1.0.1"
   }
 }
