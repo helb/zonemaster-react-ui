@@ -34,7 +34,7 @@ class ResultList extends React.Component {
           ))
         ) : (
           <p>
-            No tests sent from you browser (yet). <Link to="/">Start a test</Link>.
+            No tests sent from your browser (yet). <Link to="/">Start a test</Link>.
           </p>
         )}
       </div>
