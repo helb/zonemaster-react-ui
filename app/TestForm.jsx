@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import backend from './backend';
 import db from './db';
+import config from '../config.json';
 import Button from './styled/Button';
 import Progress from './styled/Progress';
 
@@ -123,28 +124,32 @@ export default class TestForm extends React.Component {
               }}
             />
           </DomainInput>
-          <label htmlFor="ipv4">
-            <input
-              type="checkbox"
-              id="ipv4"
-              name="ipv4"
-              onChange={this.handleOptionChange}
-              disabled={this.state.testRunning || !this.state.testOptions.ipv6}
-              checked={this.state.testOptions.ipv4}
-            />
-            IPv4
-          </label>
-          <label htmlFor="ipv6">
-            <input
-              type="checkbox"
-              id="ipv6"
-              name="ipv6"
-              onChange={this.handleOptionChange}
-              disabled={this.state.testRunning || !this.state.testOptions.ipv4}
-              checked={this.state.testOptions.ipv6}
-            />
-            IPv6
-          </label>
+          {config.showIpOptions ? (
+            <label htmlFor="ipv4">
+              <input
+                type="checkbox"
+                id="ipv4"
+                name="ipv4"
+                onChange={this.handleOptionChange}
+                disabled={this.state.testRunning || !this.state.testOptions.ipv6}
+                checked={this.state.testOptions.ipv4}
+              />
+              IPv4
+            </label>
+          ) : null}
+          {config.showIpOptions ? (
+            <label htmlFor="ipv6">
+              <input
+                type="checkbox"
+                id="ipv6"
+                name="ipv6"
+                onChange={this.handleOptionChange}
+                disabled={this.state.testRunning || !this.state.testOptions.ipv4}
+                checked={this.state.testOptions.ipv6}
+              />
+              IPv6
+            </label>
+          ) : null}
           {!this.state.testRunning ? (
             <Button type="submit" disabled={this.state.testRunning || !this.state.validParams}>
               Start
