@@ -24,13 +24,19 @@ class ResultList extends React.Component {
   render() {
     return (
       <div>
-        {this.state.results.map(item => (
-          <p key={item.id}>
-            <Link to={`/result/${item.id}`}>
-              {new Date(item.date).toLocaleString()} – {item.domain}
-            </Link>
+        {this.state.results.length > 0 ? (
+          this.state.results.map(item => (
+            <p key={item.id}>
+              <Link to={`/result/${item.id}`}>
+                {new Date(item.date).toLocaleString()} – {item.domain}
+              </Link>
+            </p>
+          ))
+        ) : (
+          <p>
+            No tests sent from you browser (yet). <Link to="/">Start a test</Link>.
           </p>
-        ))}
+        )}
       </div>
     );
   }
