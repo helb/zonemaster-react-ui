@@ -18,6 +18,14 @@ const HeaderContainer = styled.header`
     svg {
       margin-right: 0.3em;
     }
+
+    .beta {
+      font-size: 1rem;
+      text-transform: uppercase;
+      font-weight: normal;
+      transform: translate(-2em, 1.1em) rotate(-8deg);
+      display: inline-block;
+    }
   }
 `;
 
@@ -49,6 +57,7 @@ const Header = props => (
     <h1>
       <Logo />
       {props.title}
+      <span className="beta">beta</span>
     </h1>
     <Navigation>
       <Link to="/">New test</Link>
