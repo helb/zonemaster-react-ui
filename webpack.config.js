@@ -23,7 +23,10 @@ module.exports = {
       filename: 'index.html'
     }),
     new webpack.NamedModulesPlugin(),
-    new FaviconsWebpackPlugin('./app/assets/icons/favicon.svg'),
+    new FaviconsWebpackPlugin({
+      logo: './app/assets/icons/favicon.svg',
+      prefix: '/icons-[hash:10]/'
+    }),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
