@@ -24,7 +24,7 @@ const AppContent = styled.div`
 const App = () => (
   <Router>
     <AppContainer>
-      <Header title={config.text.title} />
+      <Header title={config.text.title} beta={config.beta} />
       <AppContent>
         <Switch>
           <Route exact path="/" component={TestForm} />

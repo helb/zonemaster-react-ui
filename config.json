@@ -1,6 +1,7 @@
 {
   "backendUrl": "https://zonemaster.labs.nic.cz/backend/",
   "showIpOptions": false,
+  "beta": true,
   "colors": {
     "levels": {
       "DEBUG": "#7a7a7a",

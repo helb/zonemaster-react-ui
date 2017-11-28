@@ -20,10 +20,13 @@ const HeaderContainer = styled.header`
     }
 
     .beta {
-      font-size: 1rem;
+      font-size: 0.9rem;
       text-transform: uppercase;
       font-weight: normal;
-      transform: translate(-2em, 1.1em) rotate(-8deg);
+      transform: translate(-2.9em, 0.9em) rotate(-8deg);
+      background: rgba(170, 170, 170, 0.6);
+      color: #fff;
+      padding: 0.1rem 0.4rem;
       display: inline-block;
     }
   }
@@ -57,7 +60,7 @@ const Header = props => (
     <h1>
       <Logo />
       {props.title}
-      <span className="beta">beta</span>
+      {props.beta ? <span className="beta">beta</span> : null }
     </h1>
     <Navigation>
       <Link to="/">New test</Link>
@@ -68,7 +71,8 @@ const Header = props => (
 );
 
 Header.propTypes = {
-  title: PropTypes.string.isRequired
+  title: PropTypes.string.isRequired,
+  beta: PropTypes.bool
 };
 
 export default Header;
