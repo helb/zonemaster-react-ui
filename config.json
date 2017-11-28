@@ -24,8 +24,13 @@
   },
   "text": {
     "title": "Zonemaster",
-    "footer": "© 2017 CZ.NIC Labs"
-  },
-  "footerLogo": "https://www.netmetr.cz/theme/images/logo-cznic.svg",
-  "footerLink": "https://www.nic.cz/"
+    "footer": {
+      "text": "© 2017 CZ.NIC Labs",
+      "mail": "dnscheck@labs.nic.cz",
+      "logo": {
+        "image": "https://www.netmetr.cz/theme/images/logo-cznic.svg",
+        "link": "https://www.nic.cz/"
+      }
+    }
+  }
 }

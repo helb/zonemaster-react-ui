@@ -33,7 +33,7 @@ const App = () => (
           <Route render={() => <p>Page not found. :(</p>} />
         </Switch>
       </AppContent>
-      <Footer text={config.text.footer} logo={config.footerLogo} logoLink={config.footerLink} />
+      <Footer data={config.text.footer} />
     </AppContainer>
   </Router>
 );

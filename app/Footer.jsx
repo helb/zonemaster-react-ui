@@ -12,6 +12,14 @@ const FooterContainer = styled.footer`
 
   .footer-text {
     flex: 1;
+
+    a {
+      &,
+      &:link,
+      &:visited {
+        color: #333;
+      }
+    }
   }
 
   .footer-logo {
@@ -46,22 +54,32 @@ class Footer extends React.Component {
     return (
       <FooterContainer>
         <p className="footer-text">
-          {this.props.text} |{' '}
-          {this.state.version ? `backend : ${this.state.version.zonemaster_backend} ` : null}
-          {this.state.version ? `| engine : ${this.state.version.zonemaster_engine}` : null}
+          {this.props.data.text}{' '}
+          {this.props.data.mail ? (
+            <span>| <a href={`mailto:${this.props.data.mail}`}>{this.props.data.mail}</a></span>
+          ) : null}
+          {this.state.version ? ` | backend: ${this.state.version.zonemaster_backend} ` : null}
+          {this.state.version ? ` | engine: ${this.state.version.zonemaster_engine}` : null}
         </p>
-        <a href={this.props.logoLink} className="footer-logo">
-          <img alt="CZ.NIC" src={this.props.logo} />
-        </a>
+        {this.props.data.logo ? (
+          <a href={this.props.data.logo.link} className="footer-logo">
+            <img alt={this.props.data.logo.link} src={this.props.data.logo.image} />
+          </a>
+        ) : null}
       </FooterContainer>
     );
   }
 }
 
 Footer.propTypes = {
-  text: PropTypes.string.isRequired,
-  logo: PropTypes.string.isRequired,
-  logoLink: PropTypes.string.isRequired
+  data: PropTypes.shape({
+    text: PropTypes.string.isRequired,
+    mail: PropTypes.string,
+    logo: PropTypes.shape({
+      image: PropTypes.string.isRequired,
+      link: PropTypes.string.isRequired
+    })
+  }).isRequired
 };
 
 export default Footer;
