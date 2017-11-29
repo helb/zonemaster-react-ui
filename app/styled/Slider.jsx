@@ -17,14 +17,6 @@ export default styled.input`
     background: #aaa;
     cursor: pointer;
     transition: background 0.15s ease-in-out;
-
-    &:hover {
-      background: #999;
-    }
-  }
-
-  &:active::-webkit-slider-thumb {
-    background: #999;
   }
 
   &::-moz-range-thumb {
@@ -35,13 +27,21 @@ export default styled.input`
     background: #aaa;
     cursor: pointer;
     transition: background 0.15s ease-in-out;
+  }
 
-    &:hover {
-      background: #999;
-    }
+  &::-webkit-slider-thumb:hover {
+    background: #999;
+  }
+
+  &::-moz-range-thumb:hover {
+    background: #999;
   }
 
   &:active::-moz-range-thumb {
+    background: #999;
+  }
+
+  &:active::-webkit-slider-thumb {
     background: #999;
   }
 `;
