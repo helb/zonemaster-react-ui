@@ -28,6 +28,7 @@ const DomainInput = styled.label`
     flex: 1;
     margin-left: 1rem;
     padding: 0.5rem;
+    font-size: 1rem;
   }
 `;
 

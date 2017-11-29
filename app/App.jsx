@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
 import TestResult from './TestResult';
 import TestForm from './TestForm';
@@ -16,7 +16,7 @@ const AppContainer = styled.div`
 
 const AppContent = styled.div`
   flex: 1;
-  padding: 1rem 14vw;
+  padding: 2rem 14vw;
   display: flex;
   flex-direction: column;
 `;
