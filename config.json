@@ -1,5 +1,9 @@
 {
   "backendUrl": "https://zonemaster.labs.nic.cz/backend/",
+  "piwik": {
+    "url": "piwik.nic.cz",
+    "id": 52
+  },
   "showIpOptions": false,
   "beta": true,
   "defaultLevel": "NOTICE",

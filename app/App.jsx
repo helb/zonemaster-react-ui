@@ -7,6 +7,8 @@ import ResultList from './ResultList';
 import Header from './Header';
 import Footer from './Footer';
 import config from '../config.json';
+import history from './history';
+import piwik from './piwik';
 
 const AppContainer = styled.div`
   min-height: 100vh;
@@ -22,7 +24,7 @@ const AppContent = styled.div`
 `;
 
 const App = () => (
-  <Router>
+  <Router history={piwik.connectToHistory(history)}>
     <AppContainer>
       <Header title={config.text.title} beta={config.beta} />
       <AppContent>
