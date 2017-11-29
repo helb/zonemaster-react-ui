@@ -81,7 +81,7 @@ class TestResult extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      maxLevel: 3
+      maxLevel: levels.indexOf(config.defaultLevel)
     };
     this.changeLevel = this.changeLevel.bind(this);
   }
