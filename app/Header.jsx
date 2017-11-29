@@ -16,7 +16,10 @@ const HeaderContainer = styled.header`
     white-space: nowrap;
 
     svg {
-      margin-right: 0.3em;
+      margin-right: 0.1em;
+      height: 1.4em;
+      width: 1.4em;
+      vertical-align: middle;
     }
 
     .beta {
@@ -60,11 +63,10 @@ const Header = props => (
     <h1>
       <Logo />
       {props.title}
-      {props.beta ? <span className="beta">beta</span> : null }
+      {props.beta ? <span className="beta">beta</span> : null}
     </h1>
     <Navigation>
       <Link to="/">New test</Link>
-      <Link to="/undelegated">Undelegated domain test</Link>
       <Link to="/result">Results</Link>
     </Navigation>
   </HeaderContainer>

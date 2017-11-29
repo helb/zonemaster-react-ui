@@ -9,38 +9,38 @@ const FooterContainer = styled.footer`
   padding: 1rem 14vw;
   display: flex;
   align-items: center;
+`;
 
-  .footer-text {
-    flex: 1;
+const Text = styled.p`
+  flex: 1;
 
-    a {
-      &,
-      &:link,
-      &:visited {
-        color: #333;
-      }
-    }
-
-    span {
-      white-space: nowrap;
-      display: inline-block;
-
-      &:not(:first-child) {
-        padding-left: 0.33em;
-      }
+  a {
+    &,
+    &:link,
+    &:visited {
+      color: #333;
     }
   }
 
-  .footer-logo {
-    color: black;
-    text-decoration: none;
-    height: 1.5em;
-    margin-left: 2em;
+  span {
+    white-space: nowrap;
+    display: inline-block;
 
-    img {
-      height: 1.5em;
-      vertical-align: middle;
+    &:not(:first-child) {
+      padding-left: 0.33em;
     }
+  }
+`;
+
+const Logo = styled.a`
+  color: black;
+  text-decoration: none;
+  height: 1.5em;
+  margin-left: 2em;
+
+  img {
+    height: 1.5em;
+    vertical-align: middle;
   }
 `;
 
@@ -62,7 +62,7 @@ class Footer extends React.Component {
   render() {
     return (
       <FooterContainer>
-        <p className="footer-text">
+        <Text>
           <span>{this.props.data.text} </span>
           {this.props.data.mail ? (
             <span>
@@ -75,11 +75,11 @@ class Footer extends React.Component {
           {this.state.version ? (
             <span> | engine: {this.state.version.zonemaster_engine} </span>
           ) : null}
-        </p>
+        </Text>
         {this.props.data.logo ? (
-          <a href={this.props.data.logo.link} className="footer-logo">
+          <Logo href={this.props.data.logo.link} className="footer-logo">
             <img alt={this.props.data.logo.link} src={this.props.data.logo.image} />
-          </a>
+          </Logo>
         ) : null}
       </FooterContainer>
     );

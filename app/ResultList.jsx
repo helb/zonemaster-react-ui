@@ -23,7 +23,7 @@ class ResultList extends React.Component {
 
   render() {
     return (
-      <div>
+      <React.Fragment>
         {this.state.results.length > 0 ? (
           this.state.results.map(item => (
             <p key={item.id}>
@@ -37,7 +37,7 @@ class ResultList extends React.Component {
             No tests sent from your browser (yet). <Link to="/">Start a test</Link>.
           </p>
         )}
-      </div>
+      </React.Fragment>
     );
   }
 }

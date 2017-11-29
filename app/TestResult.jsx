@@ -4,11 +4,14 @@ import PropTypes from 'prop-types';
 import backend from './backend';
 import config from '../config.json';
 
-const Container = styled.div`
-  ul {
-    list-style-position: inside;
-    margin-bottom: 2em;
-  }
+const Domain = styled.h2`
+  font-size: 1.667em;
+  margin-bottom: 1em;
+`;
+
+const Datetime = styled.h3`
+  font-size: 1.3em;
+  margin-bottom: 1em;
 `;
 
 const ResultTable = styled.table`
@@ -59,17 +62,14 @@ class TestResult extends React.Component {
       return <p>Invalid test ID.</p>;
     }
     return (
-      <Container>
-        <ul>
-          <li>domain: {this.state.testResult ? this.state.testResult.params.domain : 'loading'}</li>
-          <li>
-            date:{' '}
-            {this.state.testResult
-              ? new Date(this.state.testResult.creation_time).toLocaleString()
-              : 'loading'}
-          </li>
-        </ul>
-
+      <React.Fragment>
+        <Domain>{this.state.testResult ? this.state.testResult.params.domain : '…'}</Domain>
+        <Datetime>
+          {' '}
+          {this.state.testResult
+            ? new Date(this.state.testResult.creation_time).toLocaleString()
+            : '…'}
+        </Datetime>
         <ResultTable>
           <tbody>
             {this.state.testResult
@@ -81,13 +81,13 @@ class TestResult extends React.Component {
                     id={
                         items[index - 1] && items[index - 1].module !== item.module
                           ? item.module.toLowerCase()
-                          : ''
+                          : null
                       }
                   >
                     {!items[index - 1] ? items[0].module : ''}
                     {items[index - 1] && items[index - 1].module !== item.module
                         ? item.module
-                        : ''}
+                        : null}
                   </ModuleCell>
                   <LevelCell color={config.colors.levels[item.level]}>{item.level}</LevelCell>
                   <MessageCell>{item.message}</MessageCell>
@@ -96,7 +96,7 @@ class TestResult extends React.Component {
               : null}
           </tbody>
         </ResultTable>
-      </Container>
+      </React.Fragment>
     );
   }
 }

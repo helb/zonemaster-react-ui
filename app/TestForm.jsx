@@ -7,20 +7,14 @@ import config from '../config.json';
 import Button from './styled/Button';
 import Progress from './styled/Progress';
 
-const FormContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex: 1;
-`;
-
 const Form = styled.form`
   border: 0.2em solid #ddd;
   padding: 1rem;
   display: flex;
   flex-direction: column;
   line-height: 2rem;
-  }
+  align-self: center;
+  margin: auto;
 `;
 
 const DomainInput = styled.label`
@@ -29,7 +23,7 @@ const DomainInput = styled.label`
   white-space: nowrap;
 
   input {
-    min-width: 12em;
+    min-width: 16em;
     border: 0.1em solid #666;
     flex: 1;
     margin-left: 1rem;
@@ -111,59 +105,57 @@ export default class TestForm extends React.Component {
 
   render() {
     return (
-      <FormContainer>
-        <Form onSubmit={this.handleFormSubmit}>
-          <DomainInput>
-            Domain name:
+      <Form onSubmit={this.handleFormSubmit}>
+        <DomainInput>
+          Domain name:
+          <input
+            type="text"
+            onChange={this.handleDomainChange}
+            disabled={this.state.testRunning}
+            ref={(input) => {
+              this.domainInput = input;
+            }}
+          />
+        </DomainInput>
+        {config.showIpOptions ? (
+          <label htmlFor="ipv4">
             <input
-              type="text"
-              onChange={this.handleDomainChange}
-              disabled={this.state.testRunning}
-              ref={(input) => {
-                this.domainInput = input;
-              }}
+              type="checkbox"
+              id="ipv4"
+              name="ipv4"
+              onChange={this.handleOptionChange}
+              disabled={this.state.testRunning || !this.state.testOptions.ipv6}
+              checked={this.state.testOptions.ipv4}
             />
-          </DomainInput>
-          {config.showIpOptions ? (
-            <label htmlFor="ipv4">
-              <input
-                type="checkbox"
-                id="ipv4"
-                name="ipv4"
-                onChange={this.handleOptionChange}
-                disabled={this.state.testRunning || !this.state.testOptions.ipv6}
-                checked={this.state.testOptions.ipv4}
-              />
-              IPv4
-            </label>
-          ) : null}
-          {config.showIpOptions ? (
-            <label htmlFor="ipv6">
-              <input
-                type="checkbox"
-                id="ipv6"
-                name="ipv6"
-                onChange={this.handleOptionChange}
-                disabled={this.state.testRunning || !this.state.testOptions.ipv4}
-                checked={this.state.testOptions.ipv6}
-              />
-              IPv6
-            </label>
-          ) : null}
-          {!this.state.testRunning ? (
-            <Button type="submit" disabled={this.state.testRunning || !this.state.validParams}>
-              Start
-            </Button>
-          ) : (
-            <Progress value={this.state.testProgress}>{this.state.testProgress} %</Progress>
-          )}
-          {this.state.testId && this.state.testProgress === 100 ? (
-            <Redirect push to={`/result/${this.state.testId}`} />
-          ) : (
-            ''
-          )}
-        </Form>
-      </FormContainer>
+            IPv4
+          </label>
+        ) : null}
+        {config.showIpOptions ? (
+          <label htmlFor="ipv6">
+            <input
+              type="checkbox"
+              id="ipv6"
+              name="ipv6"
+              onChange={this.handleOptionChange}
+              disabled={this.state.testRunning || !this.state.testOptions.ipv4}
+              checked={this.state.testOptions.ipv6}
+            />
+            IPv6
+          </label>
+        ) : null}
+        {!this.state.testRunning ? (
+          <Button type="submit" disabled={this.state.testRunning || !this.state.validParams}>
+            Start
+          </Button>
+        ) : (
+          <Progress value={this.state.testProgress}>{this.state.testProgress} %</Progress>
+        )}
+        {this.state.testId && this.state.testProgress === 100 ? (
+          <Redirect push to={`/result/${this.state.testId}`} />
+        ) : (
+          ''
+        )}
+      </Form>
     );
   }
 }
