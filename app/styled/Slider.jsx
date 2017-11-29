@@ -44,5 +44,4 @@ export default styled.input`
   &:active::-moz-range-thumb {
     background: #999;
   }
-}
 `;
