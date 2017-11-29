@@ -8,7 +8,7 @@ export default styled.button`
   background: transparent;
   color: #666;
   font-size: 1rem;
-  line-height: 1em;
+  line-height: 1.4em;
 
   &:disabled {
     color: #aaa;
