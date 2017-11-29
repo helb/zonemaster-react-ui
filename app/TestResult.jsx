@@ -3,12 +3,14 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import backend from './backend';
 import config from '../config.json';
+import Slider from './styled/Slider';
 
 const Header = styled.header`
   display: flex;
   align-items: flex-start;
   margin-bottom: 2em;
   border-bottom: 0.1rem solid #ddd;
+  flex-wrap: wrap;
 `;
 
 const Heading = styled.div`
@@ -18,57 +20,15 @@ const Heading = styled.div`
 const LevelFilter = styled.div`
   display: flex;
   align-items: center;
+  margin-bottom: 2em;
 
   span {
     margin-right: 1em;
-  }
-
-  input {
-    appearance: none;
-    height: 0.1em;
-    background: #ccc;
-    outline: none;
-    padding: 0;
-    margin: 0;
-
-    &::-webkit-slider-thumb {
-      appearance: none;
-      width: 2em;
-      height: 2em;
-      border-radius: 50%;
-      background: #aaa;
-      cursor: pointer;
-      transition: background 0.15s ease-in-out;
-
-      &:hover {
-        background: #999;
-      }
-    }
-
-    &:active::-webkit-slider-thumb {
-      background: #999;
-    }
-
-    &::-moz-range-thumb {
-      width: 2em;
-      height: 2em;
-      border: 0;
-      border-radius: 50%;
-      background: #aaa;
-      cursor: pointer;
-      transition: background 0.15s ease-in-out;
-
-      &:hover {
-        background: #999;
-      }
-    }
-
-    &:active::-moz-range-thumb {
-      background: #999;
-    }
+    white-space: nowrap;
   }
 
   select {
+    cursor: pointer;
     margin-left: 1em;
     padding: 0.5em;
     background: transparent;
@@ -157,7 +117,7 @@ class TestResult extends React.Component {
           </Heading>
           <LevelFilter>
             <span>Log level:</span>
-            <input
+            <Slider
               type="range"
               onChange={this.changeLevel}
               value={this.state.maxLevel}

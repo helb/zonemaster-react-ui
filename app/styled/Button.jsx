@@ -4,7 +4,7 @@ export default styled.button`
   padding: 0.5rem;
   cursor: pointer;
   margin-top: 1rem;
-  border: 0.2em solid #666;
+  border: 0.1em solid #666;
   background: transparent;
   color: #666;
   font-size: 1rem;

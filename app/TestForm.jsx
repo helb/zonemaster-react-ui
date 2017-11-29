@@ -21,6 +21,7 @@ const DomainInput = styled.label`
   width: 100%;
   display: flex;
   white-space: nowrap;
+  align-items: center;
 
   input {
     min-width: 16em;
