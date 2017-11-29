@@ -39,7 +39,20 @@ module.exports = {
     }),
     new FaviconsWebpackPlugin({
       logo: './app/assets/icons/favicon.svg',
-      prefix: '/icons-[hash:10]/'
+      prefix: '/icons-[hash:10]/',
+      title: 'Zonemaster',
+      icons: {
+        android: true,
+        appleIcon: true,
+        appleStartup: false,
+        coast: false,
+        favicons: true,
+        firefox: true,
+        opengraph: true,
+        twitter: true,
+        yandex: false,
+        windows: false
+      }
     }),
     // extracts the css from the js files and puts them on a separate .css file. this is for
     // performance and is used in prod environments. Styles load faster on their own .css
