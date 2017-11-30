@@ -30,7 +30,7 @@
     "react-dom": "^16.2.0",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
-    "styled-components": "^2.2.3",
+    "styled-components": "^2.2.4",
     "styled-components-breakpoint": "^1.0.1",
     "zonemaster-js": "^0.0.8"
   },
@@ -42,7 +42,7 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "cross-env": "^5.1.1",
-    "eslint": "^4.12.0",
+    "eslint": "^4.12.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-loader": "^1.9.0",
     "eslint-plugin-babel": "^4.1.2",

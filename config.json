@@ -4,6 +4,7 @@
     "url": "piwik.nic.cz",
     "id": 52
   },
+  "sentryDSN": "https://f5077ffc351f4e57adc82d8f587b7f93@sentry.labs.nic.cz/26",
   "showIpOptions": false,
   "beta": true,
   "defaultLevel": "NOTICE",
