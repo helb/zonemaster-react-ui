@@ -13,6 +13,7 @@ class ResultList extends React.Component {
 
   componentDidMount() {
     this.getResults();
+    document.title = 'Results | Zonemaster';
   }
 
   async getResults() {

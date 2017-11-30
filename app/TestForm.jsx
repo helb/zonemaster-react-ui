@@ -52,6 +52,7 @@ export default class TestForm extends React.Component {
 
   componentDidMount() {
     this.domainInput.focus();
+    document.title = 'Zonemaster';
   }
 
   handleDomainChange(event) {

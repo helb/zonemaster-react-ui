@@ -46,6 +46,7 @@ class TestResult extends React.Component {
   async getTestResult(id) {
     const testResult = await backend.testResult(id);
     this.setState({ testResult });
+    document.title = `${testResult.params.domain} | Zonemaster`;
   }
 
   changeLevel(e) {
