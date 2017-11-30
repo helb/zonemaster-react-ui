@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
 import TestResult from './TestResult';
 import TestForm from './TestForm';
