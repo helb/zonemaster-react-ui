@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import backend from './backend';
 import config from '../config.json';
-import Slider from './styled/Slider';
+import LevelFilter from './LevelFilter';
+import ResultLog from './ResultLog';
 
 const Header = styled.header`
   display: flex;
@@ -17,26 +18,6 @@ const Heading = styled.div`
   flex: 1;
 `;
 
-const LevelFilter = styled.div`
-  display: flex;
-  align-items: center;
-  margin-bottom: 2em;
-
-  span {
-    margin-right: 1em;
-    white-space: nowrap;
-  }
-
-  select {
-    cursor: pointer;
-    margin-left: 1em;
-    padding: 0.5em;
-    background: transparent;
-    border: 1px solid #aaa;
-    font-size: 1rem;
-  }
-`;
-
 const Domain = styled.h2`
   font-size: 1.667em;
   margin-bottom: 1em;
@@ -47,35 +28,7 @@ const Datetime = styled.h3`
   margin-bottom: 1em;
 `;
 
-const ResultTable = styled.table`
-  font-family: monospace;
-  border-collapse: collapse;
-  max-width: 100vw;
-`;
-
-const ResultLine = styled.tr`
-  vertical-align: top;
-`;
-
-const ModuleCell = styled.td`
-  border-left: 0.5em solid ${props => props.border};
-  font-weight: bold;
-  padding: 0.5em;
-  color: ${props => props.color};
-`;
-
-const LevelCell = styled.td`
-  font-weight: bold;
-  padding: 0.5em;
-  color: ${props => props.color};
-`;
-
-const MessageCell = styled.td`
-  padding: 0.5em;
-  word-break: break-all;
-`;
-
-const levels = ['DEBUG', 'INFO', 'NOTICE', 'WARNING', 'ERROR', 'CRITICAL'].reverse();
+const { levels } = config;
 
 class TestResult extends React.Component {
   constructor(props) {
@@ -96,7 +49,7 @@ class TestResult extends React.Component {
   }
 
   changeLevel(e) {
-    this.setState({ maxLevel: e.target.value });
+    this.setState({ maxLevel: parseInt(e.target.value, 10) });
   }
 
   render() {
@@ -115,52 +68,9 @@ class TestResult extends React.Component {
                 : '…'}
             </Datetime>
           </Heading>
-          <LevelFilter>
-            <span>Log level:</span>
-            <Slider
-              type="range"
-              onChange={this.changeLevel}
-              value={this.state.maxLevel}
-              min={0}
-              max={levels.length - 1}
-            />
-            <select onChange={this.changeLevel} value={this.state.maxLevel}>
-              {levels.map((level, index) => (
-                <option key={level} value={index}>
-                  {level}
-                </option>
-              ))}
-            </select>
-          </LevelFilter>
+          <LevelFilter levels={levels} value={this.state.maxLevel} onChange={this.changeLevel} />
         </Header>
-        <ResultTable>
-          <tbody>
-            {this.state.testResult
-              ? this.state.testResult.results
-                .filter(item => levels.indexOf(item.level) <= this.state.maxLevel)
-                .map((item, index, items) => (
-                  <ResultLine key={btoa(index + item.message)}>
-                    <ModuleCell
-                      color={config.colors.modules[item.module] || 'white'}
-                      border={config.colors.modules[item.module] || 'black'}
-                      id={
-                          items[index - 1] && items[index - 1].module !== item.module
-                            ? item.module.toLowerCase()
-                            : null
-                      }
-                    >
-                      {!items[index - 1] ? items[0].module : ''}
-                      {items[index - 1] && items[index - 1].module !== item.module
-                        ? item.module
-                        : null}
-                    </ModuleCell>
-                    <LevelCell color={config.colors.levels[item.level]}>{item.level}</LevelCell>
-                    <MessageCell>{item.message}</MessageCell>
-                  </ResultLine>
-                ))
-              : null}
-          </tbody>
-        </ResultTable>
+        <ResultLog data={this.state.testResult} levels={levels} level={this.state.maxLevel} />
       </React.Fragment>
     );
   }

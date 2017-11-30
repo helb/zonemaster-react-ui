@@ -8,6 +8,14 @@
   "showIpOptions": false,
   "beta": true,
   "defaultLevel": "NOTICE",
+  "levels": [
+    "CRITICAL",
+    "ERROR",
+    "WARNING",
+    "NOTICE",
+    "INFO",
+    "DEBUG"
+  ],
   "colors": {
     "levels": {
       "DEBUG": "#7a7a7a",
