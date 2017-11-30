@@ -21,7 +21,8 @@ module.exports = {
   // Where you want the output to go
   output: {
     path: path.join(__dirname, '/public/'),
-    filename: '[name].[chunkhash].js'
+    filename: '[name].[chunkhash].js',
+    publicPath: '/'
   },
   plugins: [
     // webpack gives your modules and chunks ids to identify them. Webpack can vary the
@@ -39,7 +40,7 @@ module.exports = {
     }),
     new FaviconsWebpackPlugin({
       logo: './app/assets/icons/favicon.svg',
-      prefix: '/icons-[hash:10]/',
+      prefix: 'icons-[hash:10]/',
       title: 'Zonemaster',
       icons: {
         android: true,
