@@ -30,6 +30,7 @@ const DomainInput = styled.label`
     margin-left: 1rem;
     padding: 0.5rem;
     font-size: 1rem;
+    text-transform: lowercase;
   }
 `;
 
@@ -58,7 +59,7 @@ export default class TestForm extends React.Component {
   handleDomainChange(event) {
     event.preventDefault();
     const newState = Object.assign({}, this.state);
-    newState.testOptions.domain = event.target.value;
+    newState.testOptions.domain = event.target.value.toLowerCase();
     this.validateParams();
     this.setState(newState);
   }
