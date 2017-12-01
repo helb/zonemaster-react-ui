@@ -5,8 +5,13 @@ import config from '../config.json';
 
 const Bar = styled.div`
   display: flex;
-  margin: 1em 0 3em;
+  margin: 1em auto 3em;
   border-bottom: 1em solid #ddd;
+  width: 70%;
+
+  @media (max-width: 700px) {
+    width: 100%;
+  }
 `;
 
 const Module = styled.div`
