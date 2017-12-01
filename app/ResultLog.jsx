@@ -11,13 +11,17 @@ const ResultTable = styled.table`
 
 const ResultLine = styled.tr`
   vertical-align: top;
+  border-top: 0.1em solid ${props => (props.border ? '#ddd' : 'transparent')};
 `;
 
 const ModuleCell = styled.td`
-  border-left: 0.5em solid ${props => props.border};
   font-weight: bold;
   padding: 0.5em;
-  color: ${props => props.color};
+  width: 1.5em;
+
+  h4 {
+    color: #666;
+  }
 `;
 
 const LevelCell = styled.td`
@@ -38,18 +42,23 @@ const ResultLog = ({ data, level, levels }) => (
         ? data.results
             .filter(item => levels.indexOf(item.level) <= level)
             .map((item, index, items) => (
-              <ResultLine key={btoa(index + item.message)}>
+              <ResultLine
+                key={btoa(index + item.message)}
+                border={
+                  index === 0 || (items[index - 1] && items[index - 1].module !== item.module)
+                }
+              >
                 <ModuleCell
-                  color={config.colors.modules[item.module] || 'white'}
-                  border={config.colors.modules[item.module] || 'black'}
                   id={
                     items[index - 1] && items[index - 1].module !== item.module
                       ? item.module.toLowerCase()
                       : null
                   }
                 >
-                  {!items[index - 1] ? items[0].module : ''}
-                  {items[index - 1] && items[index - 1].module !== item.module ? item.module : null}
+                  {!items[index - 1] ? <h4>{items[0].module}</h4> : ''}
+                  {items[index - 1] && items[index - 1].module !== item.module ? (
+                    <h4>{item.module}</h4>
+                  ) : null}
                 </ModuleCell>
                 <LevelCell color={config.colors.levels[item.level]}>{item.level}</LevelCell>
                 <MessageCell>{item.message}</MessageCell>

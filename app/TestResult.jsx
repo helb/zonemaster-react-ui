@@ -5,12 +5,12 @@ import backend from './backend';
 import config from '../config.json';
 import LevelFilter from './LevelFilter';
 import ResultLog from './ResultLog';
+import ResultBar from './ResultBar';
 
 const Header = styled.header`
   display: flex;
   align-items: flex-start;
   margin-bottom: 2em;
-  border-bottom: 0.1rem solid #ddd;
   flex-wrap: wrap;
 `;
 
@@ -71,7 +71,12 @@ class TestResult extends React.Component {
           </Heading>
           <LevelFilter levels={levels} value={this.state.maxLevel} onChange={this.changeLevel} />
         </Header>
-        <ResultLog data={this.state.testResult} levels={levels} level={this.state.maxLevel} />
+        {this.state.testResult ? (
+          <ResultBar data={this.state.testResult} levels={levels} onChange={this.changeLevel} />
+        ) : null}
+        {this.state.testResult ? (
+          <ResultLog data={this.state.testResult} levels={levels} level={this.state.maxLevel} />
+        ) : null}
       </React.Fragment>
     );
   }
