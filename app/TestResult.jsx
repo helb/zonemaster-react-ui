@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import backend from './backend';
 import config from '../config.json';
-import LevelFilter from './LevelFilter';
+import LogFilter from './LogFilter';
 import ResultLog from './ResultLog';
 import ResultBar from './ResultBar';
 
@@ -34,9 +34,11 @@ class TestResult extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      maxLevel: levels.indexOf(config.defaultLevel)
+      maxLevel: levels.indexOf(config.defaultLevel),
+      moduleFilter: ''
     };
     this.changeLevel = this.changeLevel.bind(this);
+    this.setModuleFilter = this.setModuleFilter.bind(this);
   }
 
   componentWillMount() {
@@ -47,6 +49,10 @@ class TestResult extends React.Component {
     const testResult = await backend.testResult(id);
     this.setState({ testResult });
     document.title = `${testResult.params.domain} | Zonemaster`;
+  }
+
+  setModuleFilter(e) {
+    this.setState({ moduleFilter: e.target.dataset.module || e.target.value });
   }
 
   changeLevel(e) {
@@ -69,13 +75,30 @@ class TestResult extends React.Component {
                 : '…'}
             </Datetime>
           </Heading>
-          <LevelFilter levels={levels} value={this.state.maxLevel} onChange={this.changeLevel} />
         </Header>
         {this.state.testResult ? (
-          <ResultBar data={this.state.testResult} levels={levels} onChange={this.changeLevel} />
+          <ResultBar
+            data={this.state.testResult}
+            levels={levels}
+            changeLevel={this.changeLevel}
+            changeModule={this.setModuleFilter}
+            currentModule={this.state.moduleFilter}
+          />
         ) : null}
+        <LogFilter
+          levels={levels}
+          currentLevel={this.state.maxLevel}
+          changeLevel={this.changeLevel}
+          currentModule={this.state.moduleFilter}
+          changeModule={this.setModuleFilter}
+        />
         {this.state.testResult ? (
-          <ResultLog data={this.state.testResult} levels={levels} level={this.state.maxLevel} />
+          <ResultLog
+            data={this.state.testResult}
+            levels={levels}
+            level={this.state.maxLevel}
+            module={this.state.moduleFilter}
+          />
         ) : null}
       </React.Fragment>
     );

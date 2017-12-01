@@ -35,35 +35,34 @@ const MessageCell = styled.td`
   word-break: break-all;
 `;
 
-const ResultLog = ({ data, level, levels }) => (
+const ResultLog = ({
+  data, level, levels, module
+}) => (
   <ResultTable>
     <tbody>
       {data
         ? data.results
-            .filter(item => levels.indexOf(item.level) <= level)
-            .map((item, index, items) => (
-              <ResultLine
-                key={btoa(index + item.message)}
-                border={
-                  index === 0 || (items[index - 1] && items[index - 1].module !== item.module)
-                }
-              >
-                <ModuleCell
-                  id={
-                    items[index - 1] && items[index - 1].module !== item.module
-                      ? item.module.toLowerCase()
-                      : null
-                  }
-                >
-                  {!items[index - 1] ? <h4>{items[0].module}</h4> : ''}
-                  {items[index - 1] && items[index - 1].module !== item.module ? (
-                    <h4>{item.module}</h4>
-                  ) : null}
-                </ModuleCell>
-                <LevelCell color={config.colors.levels[item.level]}>{item.level}</LevelCell>
-                <MessageCell>{item.message}</MessageCell>
-              </ResultLine>
-            ))
+          .filter(
+              item =>
+            levels.indexOf(item.level) <= level && (item.module === module || module === '')
+          )
+          .map((item, index, items) => (
+            <ResultLine
+              key={btoa(index + item.message)}
+              border={
+                index === 0 || (items[index - 1] && items[index - 1].module !== item.module)
+              }
+            >
+              <ModuleCell>
+                {!items[index - 1] ? <h4>{items[0].module}</h4> : ''}
+                {items[index - 1] && items[index - 1].module !== item.module ? (
+                  <h4>{item.module}</h4>
+                ) : null}
+              </ModuleCell>
+              <LevelCell color={config.colors.levels[item.level]}>{item.level}</LevelCell>
+              <MessageCell>{item.message}</MessageCell>
+            </ResultLine>
+          ))
         : null}
     </tbody>
   </ResultTable>
@@ -72,6 +71,7 @@ const ResultLog = ({ data, level, levels }) => (
 ResultLog.propTypes = {
   data: PropTypes.object,
   level: PropTypes.number.isRequired,
+  module: PropTypes.string,
   levels: PropTypes.array.isRequired
 };
 

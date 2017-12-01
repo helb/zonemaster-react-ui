@@ -24,7 +24,7 @@ const Module = styled.div`
     line-height: 2em;
     font-size: 1rem;
     color: #666;
-    font-weight: normal;
+    font-weight: ${props => (props.current ? 'bold' : 'normal')};
   }
 
   button {
@@ -36,6 +36,8 @@ const Module = styled.div`
     cursor: pointer;
     transition: transform 0.3s;
     background: ${props => Object.values(config.colors.levels).reverse()[props.maxLevel]};
+    outline: none;
+    transform: ${props => (props.current ? 'scale(1.2)' : 'none')};
 
     &:hover,
     &:focus {
@@ -44,36 +46,42 @@ const Module = styled.div`
   }
 `;
 
-const ResultBar = ({ data, levels, onChange }) => (
+const ResultBar = ({
+  data, levels, changeLevel, changeModule, currentModule
+}) => (
   <Bar>
-    {data.results
-      .map(item => item.module)
-      .filter((module, index, modules) => modules.indexOf(module) === index)
-      .map(module => (
-        <Module
-          key={module}
-          maxLevel={data.results
+    {config.modules.map(module => (
+      <Module
+        key={module}
+        current={currentModule === module}
+        maxLevel={data.results
+          .filter(item => item.module === module)
+          .map(item => levels.indexOf(item.level))
+          .reduce((a, b) => Math.min(a, b))}
+      >
+        <h4>{module}</h4>
+        <button
+          data-module={module}
+          value={data.results
             .filter(item => item.module === module)
             .map(item => levels.indexOf(item.level))
             .reduce((a, b) => Math.min(a, b))}
-        >
-          <h4>{module}</h4>
-          <button
-            value={data.results
-              .filter(item => item.module === module)
-              .map(item => levels.indexOf(item.level))
-              .reduce((a, b) => Math.min(a, b))}
-            onClick={onChange}
-          />
-        </Module>
-      ))}
+          onClick={(e) => {
+            changeLevel(e);
+            changeModule(e);
+          }}
+        />
+      </Module>
+    ))}
   </Bar>
 );
 
 ResultBar.propTypes = {
   data: PropTypes.object.isRequired,
   levels: PropTypes.array.isRequired,
-  onChange: PropTypes.func.isRequired
+  changeLevel: PropTypes.func.isRequired,
+  changeModule: PropTypes.func.isRequired,
+  currentModule: PropTypes.string
 };
 
 export default ResultBar;

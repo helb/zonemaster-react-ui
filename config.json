@@ -8,13 +8,18 @@
   "showIpOptions": false,
   "beta": true,
   "defaultLevel": "NOTICE",
-  "levels": [
-    "CRITICAL",
-    "ERROR",
-    "WARNING",
-    "NOTICE",
-    "INFO",
-    "DEBUG"
+  "levels": ["CRITICAL", "ERROR", "WARNING", "NOTICE", "INFO", "DEBUG"],
+  "modules": [
+    "SYSTEM",
+    "BASIC",
+    "ADDRESS",
+    "CONNECTIVITY",
+    "CONSISTENCY",
+    "DNSSEC",
+    "DELEGATION",
+    "NAMESERVER",
+    "SYNTAX",
+    "ZONE"
   ],
   "colors": {
     "levels": {
