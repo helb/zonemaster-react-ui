@@ -24,15 +24,10 @@ const ModuleCell = styled.td`
   }
 `;
 
-const LevelCell = styled.td`
-  font-weight: bold;
-  padding: 0.5em;
-  color: ${props => props.color};
-`;
-
 const MessageCell = styled.td`
   padding: 0.5em;
   word-break: break-all;
+  border-left: 0.4em solid ${props => props.color};
 `;
 
 const ResultLog = ({
@@ -59,8 +54,7 @@ const ResultLog = ({
                   <h4>{item.module}</h4>
                 ) : null}
               </ModuleCell>
-              <LevelCell color={config.colors.levels[item.level]}>{item.level}</LevelCell>
-              <MessageCell>{item.message}</MessageCell>
+              <MessageCell color={config.colors.levels[item.level]}>{item.message}</MessageCell>
             </ResultLine>
           ))
         : null}

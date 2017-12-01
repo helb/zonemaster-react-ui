@@ -23,7 +23,7 @@
   ],
   "colors": {
     "levels": {
-      "DEBUG": "#17ad4a",
+      "DEBUG": "#acacac",
       "INFO": "#17ad4a",
       "NOTICE": "#ffe600",
       "WARNING": "#ff9900",
