@@ -9,11 +9,15 @@ const HeaderContainer = styled.header`
   flex-direction: column;
 
   h1 {
-    margin: 1em auto 1em 14vw;
+    margin: 1em calc(1rem + 10vw);
     color: #666;
     font-weight: lighter;
-    font-size: 3em;
+    font-size: calc(2em + 1vw);
     white-space: nowrap;
+
+    @media (max-width: 700px) {
+      margin: 1em 1rem;
+    }
 
     svg {
       margin-right: 0.1em;
@@ -41,7 +45,11 @@ const Navigation = styled.nav`
   border-right: 0;
   display: flex;
   flex-wrap: wrap;
-  padding: 0 14vw;
+  padding: 0 calc(1rem + 10vw);
+
+  @media (max-width: 700px) {
+    padding: 0 1rem;
+  }
 
   a {
     line-height: 2rem;

@@ -18,9 +18,13 @@ const AppContainer = styled.div`
 
 const AppContent = styled.div`
   flex: 1;
-  padding: 2rem 14vw;
+  padding: 2rem calc(1rem + 10vw);
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 700px) {
+    padding: 2rem 1rem;
+  }
 `;
 
 const App = () => (

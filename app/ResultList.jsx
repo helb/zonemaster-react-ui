@@ -5,11 +5,13 @@ import db from './db';
 
 const DateCell = styled.td`
   padding: 0.25em 0 0.25em 0;
+  white-space: nowrap;
 `;
 
 const DomainCell = styled.td`
   padding: 0.25em;
   font-weight: bold;
+  white-space: nowrap;
 
   a {
     &,
@@ -43,20 +45,24 @@ class ResultList extends React.Component {
   render() {
     return (
       <table>
-        {this.state.results.length > 0 ? (
-          this.state.results.map(item => (
-            <tr key={item.id}>
-              <DateCell>{new Date(item.date).toLocaleString()}</DateCell>
-              <DomainCell>
-                <Link to={`/result/${item.id}`}>{item.domain}</Link>
-              </DomainCell>
+        <tbody>
+          {this.state.results.length > 0 ? (
+            this.state.results.map(item => (
+              <tr key={item.id}>
+                <DateCell>{new Date(item.date).toLocaleString()}</DateCell>
+                <DomainCell>
+                  <Link to={`/result/${item.id}`}>{item.domain}</Link>
+                </DomainCell>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td>
+                No tests sent from your browser (yet). <Link to="/">Start a test</Link>.
+              </td>
             </tr>
-          ))
-        ) : (
-          <p>
-            No tests sent from your browser (yet). <Link to="/">Start a test</Link>.
-          </p>
-        )}
+          )}
+        </tbody>
       </table>
     );
   }

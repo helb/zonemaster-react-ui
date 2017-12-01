@@ -6,13 +6,19 @@ import backend from './backend';
 const FooterContainer = styled.footer`
   border-top: 0.1rem solid #ddd;
   margin-top: 1rem;
-  padding: 1rem 14vw;
+  padding: 1rem calc(1rem + 10vw);
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
+
+  @media (max-width: 700px) {
+    padding: 1rem;
+  }
 `;
 
 const Text = styled.p`
   flex: 1;
+  margin-bottom: 1em;
 
   a {
     &,

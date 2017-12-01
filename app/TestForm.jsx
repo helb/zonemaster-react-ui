@@ -20,11 +20,11 @@ const Form = styled.form`
 const DomainInput = styled.label`
   width: 100%;
   display: flex;
-  white-space: nowrap;
+  flex-wrap: wrap;
   align-items: center;
 
   input {
-    min-width: 16em;
+    min-width: 10vw;
     border: 0.1em solid #666;
     flex: 1;
     margin-left: 1rem;
@@ -111,7 +111,7 @@ export default class TestForm extends React.Component {
     return (
       <Form onSubmit={this.handleFormSubmit}>
         <DomainInput>
-          Domain name:
+          <span>Domain name:</span>
           <input
             type="text"
             onChange={this.handleDomainChange}

@@ -39,42 +39,45 @@ const Module = styled.div`
     outline: none;
     transform: ${props => (props.current ? 'scale(1.2)' : 'none')};
 
-    &:hover,
-    &:focus {
+    &:hover:not(:disabled),
+    &:focus:not(:disabled) {
       transform: scale(1.2);
+    }
+
+    &:disabled {
+      cursor: default;
     }
   }
 `;
 
 const ResultBar = ({
   data, levels, changeLevel, changeModule, currentModule
-}) => (
-  <Bar>
-    {config.modules.map(module => (
-      <Module
-        key={module}
-        current={currentModule === module}
-        maxLevel={data.results
-          .filter(item => item.module === module)
-          .map(item => levels.indexOf(item.level))
-          .reduce((a, b) => Math.min(a, b))}
-      >
-        <h4>{module}</h4>
+}) => {
+  function getModule(name) {
+    const items = data.results.filter(item => item.module === name);
+
+    const maxLevel =
+      items.length > 0
+        ? items.map(item => levels.indexOf(item.level)).reduce((a, b) => Math.min(a, b))
+        : null;
+
+    return (
+      <Module key={name} current={currentModule === name} maxLevel={maxLevel}>
+        <h4>{name}</h4>
         <button
-          data-module={module}
-          value={data.results
-            .filter(item => item.module === module)
-            .map(item => levels.indexOf(item.level))
-            .reduce((a, b) => Math.min(a, b))}
+          data-module={name}
+          value={maxLevel}
+          disabled={items.length < 1}
           onClick={(e) => {
             changeLevel(e);
             changeModule(e);
           }}
         />
       </Module>
-    ))}
-  </Bar>
-);
+    );
+  }
+  return <Bar>{config.modules.map(module => getModule(module))}</Bar>;
+};
 
 ResultBar.propTypes = {
   data: PropTypes.object.isRequired,
