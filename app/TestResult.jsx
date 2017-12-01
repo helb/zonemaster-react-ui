@@ -83,6 +83,7 @@ class TestResult extends React.Component {
             changeLevel={this.changeLevel}
             changeModule={this.setModuleFilter}
             currentModule={this.state.moduleFilter}
+            currentLevel={this.state.maxLevel}
           />
         ) : null}
         <LogFilter

@@ -51,7 +51,7 @@ const Module = styled.div`
 `;
 
 const ResultBar = ({
-  data, levels, changeLevel, changeModule, currentModule
+  data, levels, changeLevel, changeModule, currentModule, currentLevel
 }) => {
   function getModule(name) {
     const items = data.results.filter(item => item.module === name);
@@ -69,8 +69,11 @@ const ResultBar = ({
           value={maxLevel}
           disabled={items.length < 1}
           onClick={(e) => {
-            changeLevel(e);
             changeModule(e);
+            const newLevel = parseInt(e.target.value, 10);
+            if (newLevel > currentLevel) {
+              changeLevel(e);
+            }
           }}
         />
       </Module>
@@ -84,7 +87,8 @@ ResultBar.propTypes = {
   levels: PropTypes.array.isRequired,
   changeLevel: PropTypes.func.isRequired,
   changeModule: PropTypes.func.isRequired,
-  currentModule: PropTypes.string
+  currentModule: PropTypes.string,
+  currentLevel: PropTypes.number.isRequired
 };
 
 export default ResultBar;
