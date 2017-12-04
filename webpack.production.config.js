@@ -36,9 +36,15 @@ module.exports = {
     // change name because the hash part changes. We want hash name changes to bust cache
     // on client browsers.
     new HtmlWebpackPlugin({
+      title: 'Zonemaster',
       template: 'app/index.tpl.html',
       inject: 'body',
-      filename: 'index.html'
+      filename: 'index.html',
+      minify: {
+        collapseWhitespace: true,
+        minifyCSS: true,
+        removeAttributeQuotes: true
+      }
     }),
     new FaviconsWebpackPlugin({
       logo: './app/assets/icons/favicon.svg',
