@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import backend from './backend';
+import Logo from './assets/logo.svg';
 
 const FooterContainer = styled.footer`
   border-top: 0.1rem solid #ddd;
@@ -38,13 +39,13 @@ const Text = styled.p`
   }
 `;
 
-const Logo = styled.a`
+const LogoLink = styled.a`
   color: black;
   text-decoration: none;
   height: 1.5em;
   margin-left: 2em;
 
-  img {
+  svg {
     height: 1.5em;
     vertical-align: middle;
   }
@@ -83,9 +84,9 @@ class Footer extends React.Component {
           ) : null}
         </Text>
         {this.props.data.logo ? (
-          <Logo href={this.props.data.logo.link} className="footer-logo">
-            <img alt={this.props.data.logo.link} src={this.props.data.logo.image} />
-          </Logo>
+          <LogoLink href={this.props.data.logo.link} className="footer-logo">
+            <Logo />
+          </LogoLink>
         ) : null}
       </FooterContainer>
     );
