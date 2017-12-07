@@ -1,7 +1,7 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import backend from './backend';
+import history from './history';
 import db from './db';
 import config from '../config.json';
 import Button from './styled/Button';
@@ -103,6 +103,7 @@ export default class TestForm extends React.Component {
         date: new Date()
       });
       clearInterval(this.updateProgressTimer);
+      history.push(`/result/${this.state.testId}`);
     }
     this.setState({ testProgress: testProgress.progress });
   }
@@ -153,11 +154,6 @@ export default class TestForm extends React.Component {
           </Button>
         ) : (
           <Progress value={this.state.testProgress}>{this.state.testProgress} %</Progress>
-        )}
-        {this.state.testId && this.state.testProgress === 100 ? (
-          <Redirect push to={`/result/${this.state.testId}`} />
-        ) : (
-          ''
         )}
       </Form>
     );
