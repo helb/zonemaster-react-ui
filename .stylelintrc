@@ -7,7 +7,7 @@
   "syntax": "scss",
   "rules": {
     "indentation": 2,
-    "unit-whitelist": ["px", "em", "rem", "vh", "vw", "%", "s"],
+    "unit-whitelist": ["px", "em", "rem", "vh", "vw", "%", "s", "deg"],
     "rule-empty-line-before": null,
     "value-list-max-empty-lines": null,
     "declaration-colon-newline-after": null
