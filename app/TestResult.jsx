@@ -6,6 +6,7 @@ import config from '../config.json';
 import LogFilter from './LogFilter';
 import ResultLog from './ResultLog';
 import ResultBar from './ResultBar';
+import Spinner from './styled/Spinner';
 
 const Header = styled.header`
   display: flex;
@@ -28,13 +29,13 @@ const Datetime = styled.h3`
   margin-bottom: 1em;
 `;
 
-const { levels } = config;
+const { levels, defaultLevel } = config;
 
 class TestResult extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      maxLevel: levels.indexOf(config.defaultLevel),
+      maxLevel: levels.indexOf(defaultLevel),
       moduleFilter: ''
     };
     this.changeLevel = this.changeLevel.bind(this);
@@ -63,20 +64,15 @@ class TestResult extends React.Component {
     if (!backend.validateTestID(this.props.match.params.id)) {
       return <p>Invalid test ID.</p>;
     }
-    return (
-      <React.Fragment>
-        <Header>
-          <Heading>
-            <Domain>{this.state.testResult ? this.state.testResult.params.domain : '…'}</Domain>
-            <Datetime>
-              {' '}
-              {this.state.testResult
-                ? new Date(this.state.testResult.creation_time).toLocaleString()
-                : '…'}
-            </Datetime>
-          </Heading>
-        </Header>
-        {this.state.testResult ? (
+    if (this.state.testResult) {
+      return (
+        <React.Fragment>
+          <Header>
+            <Heading>
+              <Domain>{this.state.testResult.params.domain}</Domain>
+              <Datetime>{new Date(this.state.testResult.creation_time).toLocaleString()}</Datetime>
+            </Heading>
+          </Header>
           <ResultBar
             data={this.state.testResult}
             levels={levels}
@@ -85,24 +81,23 @@ class TestResult extends React.Component {
             currentModule={this.state.moduleFilter}
             currentLevel={this.state.maxLevel}
           />
-        ) : null}
-        <LogFilter
-          levels={levels}
-          currentLevel={this.state.maxLevel}
-          changeLevel={this.changeLevel}
-          currentModule={this.state.moduleFilter}
-          changeModule={this.setModuleFilter}
-        />
-        {this.state.testResult ? (
+          <LogFilter
+            levels={levels}
+            currentLevel={this.state.maxLevel}
+            changeLevel={this.changeLevel}
+            currentModule={this.state.moduleFilter}
+            changeModule={this.setModuleFilter}
+          />
           <ResultLog
             data={this.state.testResult}
             levels={levels}
             level={this.state.maxLevel}
             module={this.state.moduleFilter}
           />
-        ) : null}
-      </React.Fragment>
-    );
+        </React.Fragment>
+      );
+    }
+    return <Spinner text="Loading test result from Zonemaster backend…" />;
   }
 }
 
