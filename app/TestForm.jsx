@@ -6,7 +6,7 @@ import db from './db';
 import config from '../config.json';
 import Button from './styled/Button';
 import Progress from './styled/Progress';
-import MvcrLogo from './assets/mvcr.svg';
+import Image from './assets/form_bottom.svg';
 
 const FormContainer = styled.div`
   display: flex;
@@ -19,7 +19,7 @@ const FormContainer = styled.div`
 `;
 
 const Text = styled.p`
-  margin: 1em calc(10vw + 1em);
+  margin: 1em 0;
 `;
 
 const Form = styled.form`
@@ -127,10 +127,7 @@ export default class TestForm extends React.Component {
     return (
       <FormContainer>
         <Text>
-          Cílem aplikace Zonemaster je&nbsp;ověření správnosti nastavení Vašeho DNS serveru.
-          V&nbsp;rámci aplikace je&nbsp;prováděno celkem 60&nbsp;testů, jejichž nedodržení může ve
-          svém důsledku vést k&nbsp;omezení dostupnosti poskytovaných služeb nebo způsobit
-          zranitelnost umožňující provést kybernetický útok včetně podvržení poskytovaných dat.
+          {config.text.form.top}
         </Text>
         <Form onSubmit={this.handleFormSubmit}>
           <DomainInput>
@@ -179,11 +176,9 @@ export default class TestForm extends React.Component {
           )}
         </Form>
         <Text>
-          Softwarový nástroj byl vyvinut v&nbsp;rámci projektu „Zabezpečení DNS serverů&nbsp;v ČR“
-          (VH20172018013) financovaném Ministerstvem vnitra ČR v&nbsp;rámci programu „Bezpečnostní
-          výzkum pro&nbsp;potřeby státu v&nbsp;letech 2016-2021“
+          {config.text.form.bottom}
         </Text>
-        <MvcrLogo />
+        <Image />
       </FormContainer>
     );
   }

@@ -33,6 +33,12 @@
   },
   "text": {
     "title": "Zonemaster",
+    "form": {
+      "top":
+        "Cílem aplikace Zonemaster je\u00A0ověření správnosti nastavení Vašeho DNS serveru. V\u00A0rámci aplikace je\u00A0prováděno celkem 60\u00A0testů, jejichž nedodržení může ve svém důsledku vést k\u00A0omezení dostupnosti poskytovaných služeb nebo způsobit zranitelnost umožňující provést kybernetický útok včetně podvržení poskytovaných dat.",
+      "bottom":
+        "Softwarový nástroj byl vyvinut v\u00A0rámci projektu „Zabezpečení DNS serverů\u00A0v ČR“ (VH20172018013) financovaném Ministerstvem vnitra ČR v\u00A0rámci programu „Bezpečnostní výzkum pro\u00A0potřeby státu v\u00A0letech 2016-2021“"
+    },
     "footer": {
       "text": "© 2017 CZ.NIC Labs",
       "mail": "dnscheck@labs.nic.cz",
