@@ -6,6 +6,21 @@ import db from './db';
 import config from '../config.json';
 import Button from './styled/Button';
 import Progress from './styled/Progress';
+import MvcrLogo from './assets/mvcr.svg';
+
+const FormContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  svg {
+    height: 4em;
+    margin: 1em 0;
+  }
+`;
+
+const Text = styled.p`
+  margin: 1em calc(10vw + 1em);
+`;
 
 const Form = styled.form`
   border: 0.2em solid #ddd;
@@ -14,7 +29,7 @@ const Form = styled.form`
   flex-direction: column;
   line-height: 2rem;
   align-self: center;
-  margin: auto;
+  margin: 2em auto;
 `;
 
 const DomainInput = styled.label`
@@ -110,52 +125,66 @@ export default class TestForm extends React.Component {
 
   render() {
     return (
-      <Form onSubmit={this.handleFormSubmit}>
-        <DomainInput>
-          <span>Domain name:</span>
-          <input
-            type="text"
-            onChange={this.handleDomainChange}
-            disabled={this.state.testRunning}
-            ref={(input) => {
-              this.domainInput = input;
-            }}
-          />
-        </DomainInput>
-        {config.showIpOptions ? (
-          <React.Fragment>
-            <label htmlFor="ipv4">
-              <input
-                type="checkbox"
-                id="ipv4"
-                name="ipv4"
-                onChange={this.handleOptionChange}
-                disabled={this.state.testRunning || !this.state.testOptions.ipv6}
-                checked={this.state.testOptions.ipv4}
-              />
-              IPv4
-            </label>
-            <label htmlFor="ipv6">
-              <input
-                type="checkbox"
-                id="ipv6"
-                name="ipv6"
-                onChange={this.handleOptionChange}
-                disabled={this.state.testRunning || !this.state.testOptions.ipv4}
-                checked={this.state.testOptions.ipv6}
-              />
-              IPv6
-            </label>
-          </React.Fragment>
-        ) : null}
-        {!this.state.testRunning ? (
-          <Button type="submit" disabled={this.state.testRunning || !this.state.validParams}>
-            Start
-          </Button>
-        ) : (
-          <Progress value={this.state.testProgress}>{this.state.testProgress} %</Progress>
-        )}
-      </Form>
+      <FormContainer>
+        <Text>
+          Cílem aplikace Zonemaster je&nbsp;ověření správnosti nastavení Vašeho DNS serveru.
+          V&nbsp;rámci aplikace je&nbsp;prováděno celkem 60&nbsp;testů, jejichž nedodržení může ve
+          svém důsledku vést k&nbsp;omezení dostupnosti poskytovaných služeb nebo způsobit
+          zranitelnost umožňující provést kybernetický útok včetně podvržení poskytovaných dat.
+        </Text>
+        <Form onSubmit={this.handleFormSubmit}>
+          <DomainInput>
+            <span>Domain name:</span>
+            <input
+              type="text"
+              onChange={this.handleDomainChange}
+              disabled={this.state.testRunning}
+              ref={(input) => {
+                this.domainInput = input;
+              }}
+            />
+          </DomainInput>
+          {config.showIpOptions ? (
+            <React.Fragment>
+              <label htmlFor="ipv4">
+                <input
+                  type="checkbox"
+                  id="ipv4"
+                  name="ipv4"
+                  onChange={this.handleOptionChange}
+                  disabled={this.state.testRunning || !this.state.testOptions.ipv6}
+                  checked={this.state.testOptions.ipv4}
+                />
+                IPv4
+              </label>
+              <label htmlFor="ipv6">
+                <input
+                  type="checkbox"
+                  id="ipv6"
+                  name="ipv6"
+                  onChange={this.handleOptionChange}
+                  disabled={this.state.testRunning || !this.state.testOptions.ipv4}
+                  checked={this.state.testOptions.ipv6}
+                />
+                IPv6
+              </label>
+            </React.Fragment>
+          ) : null}
+          {!this.state.testRunning ? (
+            <Button type="submit" disabled={this.state.testRunning || !this.state.validParams}>
+              Start
+            </Button>
+          ) : (
+            <Progress value={this.state.testProgress}>{this.state.testProgress} %</Progress>
+          )}
+        </Form>
+        <Text>
+          Softwarový nástroj byl vyvinut v&nbsp;rámci projektu „Zabezpečení DNS serverů&nbsp;v ČR“
+          (VH20172018013) financovaném Ministerstvem vnitra ČR v&nbsp;rámci programu „Bezpečnostní
+          výzkum pro&nbsp;potřeby státu v&nbsp;letech 2016-2021“
+        </Text>
+        <MvcrLogo />
+      </FormContainer>
     );
   }
 }
